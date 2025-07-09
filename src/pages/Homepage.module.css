@@ -1,0 +1,46 @@
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Altura: 100% del alto de la ventana menos la altura del navbar (aprox) */
+  min-height: calc(100vh - 85px); 
+  padding: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 5rem; /* ¡Hacemos el título ENORME! */
+  color: var(--color-dark-grey);
+  margin: 0;
+  line-height: 1.1;
+  /* Sombra de píxel duro */
+  text-shadow: 5px 5px 0px var(--color-red);
+}
+
+.slogan {
+  font-size: 1.2rem;
+  color: var(--color-dark-grey);
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+}
+
+.ctaButton {
+  font-size: 1.2rem;
+  padding: 15px 30px;
+}
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .title {
+    font-size: 3.5rem;
+    text-shadow: 3px 3px 0px var(--color-red);
+  }
+  .slogan {
+    font-size: 1rem;
+  }
+  .ctaButton {
+    font-size: 1rem;
+  }
+}

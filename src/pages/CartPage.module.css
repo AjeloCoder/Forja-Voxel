@@ -1,0 +1,132 @@
+.pageContainer {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.pageTitle {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--color-dark-grey);
+  text-shadow: 4px 4px 0px var(--color-red);
+}
+
+.emptyCartContainer {
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.emptyCartContainer p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Layout principal del carrito */
+.cartLayout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+/* Lista de Items */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-white);
+  padding: 1rem;
+  border: 4px solid var(--color-dark-grey);
+}
+
+.itemImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid var(--color-dark-grey);
+}
+
+.itemDetails {
+  flex-grow: 1;
+}
+
+.itemName {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.itemPrice {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.itemSubtotal {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: var(--color-dark-grey);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.removeButton:hover {
+  color: var(--color-red);
+}
+
+/* Resumen de Compra */
+.summary {
+  background-color: var(--color-white);
+  border: 4px solid var(--color-dark-grey);
+  padding: 1.5rem;
+  height: fit-content; /* Para que no se estire */
+}
+
+.summary h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0 0 2rem;
+  color: var(--color-red);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.totalRow {
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-top: 2px solid var(--color-light-grey);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cartLayout {
+    grid-template-columns: 1fr; /* Apila las columnas */
+  }
+}
