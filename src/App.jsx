@@ -8,7 +8,7 @@ import Footer from './componentes/layout/Footer';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Forja-Voxel">
       <Toaster
         position="bottom-right"
         toastOptions={{
