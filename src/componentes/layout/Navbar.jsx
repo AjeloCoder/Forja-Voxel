@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
-// ...otras importaciones
-import styles from './Navbar.module.css';
+import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
-// Importamos las categorías desde nuestro archivo de productos
-import productsData from '../../data/products.json';
-import { useCart } from '../../context/CartContext';
-import logoIcon from '../../assets/imagenes/logo-icon.png'
+import { useCart } from "../../context/UseCart"
+import logoIcon from '../../assets/imagenes/logo-icon.png';
 import { FaBars, FaTimes, FaShoppingCart } from 'react-icons/fa';
+import styles from './Navbar.module.css';
 
-// Obtenemos una lista única de categorías
-const categories = [...new Set(productsData.map(p => p.category))];
+const hardcodedCategories = ['accesorios', 'gaming', 'decoracion', 'figuras'];
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // Nuevo estado para el dropdown de productos
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
   
   const { items } = useCart();
@@ -29,17 +23,18 @@ function Navbar() {
     setIsDropdownOpen(false);
   }
 
+  const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
-        {/* Logo que lleva al inicio y cierra menús */}
         <Link to="/" className={styles.logoLink} onClick={closeMenus}>
           <img src={logoIcon} alt="Icono de Forja Vóxel" className={styles.logo} />
         </Link>
-
-        {/* Menú de Navegación para Desktop */}
         <ul className={styles.navLinksDesktop}>
-          {/* Elemento de Productos con Dropdown */}
           <li 
             className={styles.dropdownContainer}
             onMouseEnter={() => setIsDropdownOpen(true)}
@@ -48,47 +43,43 @@ function Navbar() {
             <NavLink 
               to="/productos" 
               className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink}
-              onClick={() => setIsDropdownOpen(false)}
+              onClick={() => setIsDropdownOpen(false)} 
             >
               Productos
             </NavLink>
             {isDropdownOpen && (
               <div className={styles.dropdownMenu}>
-                <Link to="/productos" onClick={closeMenus}>Todos</Link>
-                {categories.map(category => (
+                <Link to="/productos" onClick={closeMenus} aria-label="Ver todos los productos">Todos</Link>
+                {hardcodedCategories.map(category => (
                   <Link 
                     key={category} 
                     to={`/category/${category}`} 
                     onClick={closeMenus}
+                    aria-label={`Ver productos de la categoría ${category}`}
                   >
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                    {capitalize(category)}
                   </Link>
                 ))}
               </div>
             )}
           </li>
-          <li><NavLink to="/nosotros" className={({ isActive }) => isActive ? styles.active : ''}>Nosotros</NavLink></li>
-          <li><NavLink to="/contacto" className={({ isActive }) => isActive ? styles.active : ''}>Contacto</NavLink></li>
+          <li><NavLink to="/nosotros" className={({ isActive }) => isActive ? styles.active : ''} aria-label="Ir a la página sobre nosotros">Nosotros</NavLink></li>
+          <li><NavLink to="/contacto" className={({ isActive }) => isActive ? styles.active : ''} aria-label="Ir a la página de contacto">Contacto</NavLink></li>
         </ul>
 
-         {/* Iconos a la derecha (Carrito y Hamburguesa) */}
         <div className={styles.iconsContainer}>
-          {/* Icono del Carrito */}
-          <Link to="/carrito" className={styles.cartIconContainer}>
+          <Link to="/carrito" className={styles.cartIconContainer} aria-label="Ver carrito de compras">
             <FaShoppingCart />
             {totalItemsInCart > 0 && (
               <span className={styles.cartBadge}>{totalItemsInCart}</span>
             )}
           </Link>
-
-          {/* Icono de Hamburguesa (solo en móvil) */}
-          <div className={styles.hamburger} onClick={toggleMobileMenu}>
+          <div className={styles.hamburger} onClick={toggleMobileMenu} aria-label="Abrir o cerrar menú de navegación">
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
           </div>
         </div>
       </div>
 
-      {/* Menú desplegable para Móvil */}
       {isMobileMenuOpen && (
         <ul className={styles.navLinksMobile}>
           <li onClick={toggleMobileMenu}><NavLink to="/productos" className={({ isActive }) => isActive ? styles.active : ''}>Productos</NavLink></li>

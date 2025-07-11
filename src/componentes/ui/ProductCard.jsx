@@ -1,5 +1,4 @@
-import React from 'react';
-import { useCart } from '../../context/CartContext';
+import { useCart } from '../../context/UseCart';
 import styles from './ProductCard.module.css';
 import QuantitySelector from './QuantitySelector';
 import toast from 'react-hot-toast';

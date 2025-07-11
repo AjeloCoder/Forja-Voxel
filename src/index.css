@@ -1,8 +1,8 @@
-/* Definición de variables de color basadas en el logo */
+
 :root {
-  --color-red: #ff1100; /* Rojo vibrante */
-  --color-dark-grey: #2c2c2c; /* Gris oscuro del yunque */
-  --color-light-grey: #f0f0f0; /* Fondo */
+  --color-red: #ff1100; 
+  --color-dark-grey: #2c2c2c; 
+  --color-light-grey: #f0f0f0; 
   --color-white: #ffffff;
   --font-pixel: 'Press Start 2P', cursive;
 }
@@ -16,13 +16,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Para que las imágenes no se pixelen al escalar (irónico, pero necesario) */
+
 img {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
 
-/* Estilo de botón pixelado reutilizable */
+
 .pixel-button {
   background-color: var(--color-red);
   color: var(--color-white);

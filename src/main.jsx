@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css'; // Importaremos los estilos globales aquí
+import './index.css'; 
 import App from './App';
-import { CartProvider } from './context/CartContext';
+import { CartProvider } from './context/CartProvider.jsx';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <CartProvider>
       <App />

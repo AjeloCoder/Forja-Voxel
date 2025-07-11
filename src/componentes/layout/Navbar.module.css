@@ -16,19 +16,19 @@
 }
 
 .logo {
-  height: 80px; /* Aumentamos el tamaño */
+  height: 80px;
   image-rendering: pixelated;
-  transition: transform 0.2s ease-in-out; /* Añadimos una transición para el hover */
+  transition: transform 0.2s ease-in-out;
 }
 
-/* Efecto llamativo al pasar el mouse */
+
 .logo:hover {
   transform: scale(1.1);
 }
 
-/* --- Menú Desktop --- */
+
 .navLinksDesktop {
-  display: none; /* Oculto en móvil por defecto */
+  display: none; 
   list-style: none;
   margin: 0;
   padding: 0;
@@ -48,7 +48,6 @@
   color: var(--color-red);
 }
 
-/* --- Iconos --- */
 .iconsContainer {
   display: flex;
   align-items: center;
@@ -84,10 +83,9 @@
 
 .hamburger {
   cursor: pointer;
-  display: block; /* Visible en móvil por defecto */
+  display: block; 
 }
 
-/* --- Menú Móvil --- */
 .navLinksMobile {
   list-style: none;
   padding: 1rem 0;
@@ -113,16 +111,14 @@
   position: relative;
 }
 
-/* Enlace principal de Productos */
 .navLink {
   color: var(--color-white);
   text-decoration: none;
   font-size: 0.8rem;
   transition: color 0.2s ease-in-out;
-  padding: 1rem 0; /* Asegura área de hover */
+  padding: 1rem 0; 
 }
 
-/* Menú desplegable */
 .dropdownMenu {
   position: absolute;
   top: 100%;
@@ -154,15 +150,15 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Media Query para Responsive --- */
+
 @media (min-width: 768px) {
   .navLinksDesktop {
-    display: flex; /* Muestra el menú de desktop en pantallas grandes */
+    display: flex; 
   }
   .hamburger {
-    display: none; /* Oculta el icono de hamburguesa */
+    display: none; 
   }
   .navLinksMobile {
-    display: none; /* Oculta el menú desplegable */
+    display: none;
   }
 }

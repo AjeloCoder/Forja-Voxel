@@ -1,22 +1,13 @@
-// src/componentes/layout/Footer/Footer.jsx
-
-import React from 'react';
-
-// 1. Importa la imagen como antes
 import alejoLogo from '../../assets/imagenes/Logo-Alejo.png';
 import instagramIcon from '../../assets/imagenes/instagram.png'
 import githubIcon from '../../assets/imagenes/github.png'
 import linkedinIcon from '../../assets/imagenes/linkedin.png'
-
-// 2. ¡EL CAMBIO CLAVE! Importa el archivo .module.css a un objeto llamado 'styles'
 import styles from './Footer.module.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    // 3. Usa el objeto 'styles' para aplicar cada clase.
-    // Nota que 'site-footer' se convierte en styles['site-footer'] por el guión.
     <footer id="site-footer" className={styles.siteFooter}>
       <div className={styles.footerContent}>
         <div className={styles.footerLogo}>

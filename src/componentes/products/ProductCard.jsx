@@ -1,12 +1,9 @@
-// src/componentes/products/ProductCard.jsx
-
-import React from 'react';
 import styles from './ProductCard.module.css';
 
-// El componente recibe un objeto 'product' a través de las props
+
 function ProductCard({ product }) {
-  // Desestructuramos el objeto para acceder a sus propiedades más fácilmente
   const { name, price, image } = product;
+
 
   return (
     <div className={styles.card}>

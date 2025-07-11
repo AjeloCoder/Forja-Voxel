@@ -1,11 +1,9 @@
-/* src/componentes/layout/Footer/Footer.module.css */
-
 .siteFooter {
   background-color: #212121;
   color: #ffffff;
   padding: 2rem 1rem;
   border-top: 2px solid #444;
-  font-family: 'Press Start 2P', monospace; /* Reemplaza con tu fuente pixelada si es otra */
+  font-family: 'Press Start 2P', monospace; 
   text-align: center;
 }
 
@@ -23,7 +21,7 @@
   flex-basis: 150px;
 }
 
-.alejoLogo { /* Le añadí una clase a la imagen para poder darle estilo */
+.alejoLogo {
   max-width: 100px;
   image-rendering: pixelated;
 }
@@ -59,22 +57,15 @@
 }
 
 .socialIcon {
-  width: 50px;  /* Ajusta el tamaño como prefieras */
+  width: 50px;  
   height: 50px;
-  image-rendering: pixelated; /* ¡Muy importante para mantener el estilo pixel art! */
-  vertical-align: middle; /* Ayuda a alinear si hubiera texto al lado */
-  transition: transform 0.2s ease-in-out; /* Animación suave para el hover */
+  image-rendering: pixelated; 
+  vertical-align: middle; 
+  transition: transform 0.2s ease-in-out; 
 }
 
-/* Efecto al pasar el ratón por encima del enlace */
 .socialLink:hover .socialIcon {
-  transform: scale(1.15); /* El icono se agranda un poco */
-}
-
-/* El estilo .socialLink:hover que tenías antes ya no es necesario, pero no hace daño dejarlo */
-.socialLink:hover {
-  /* La propiedad color ya no tiene efecto visible, pero la dejamos por si acaso */
-  color: #ff4757;
+  transform: scale(1.15); 
 }
 
 @media (max-width: 768px) {
