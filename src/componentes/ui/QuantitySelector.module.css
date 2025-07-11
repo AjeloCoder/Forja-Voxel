@@ -1,0 +1,30 @@
+.quantitySelector {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--color-dark-grey);
+}
+
+.button {
+  background-color: var(--color-light-grey);
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-family: var(--font-pixel);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: var(--color-dark-grey);
+  color: var(--color-white);
+}
+
+.quantity {
+  width: 40px;
+  text-align: center;
+  font-size: 1rem;
+  border-left: 2px solid var(--color-dark-grey);
+  border-right: 2px solid var(--color-dark-grey);
+  padding: 5px 0;
+}

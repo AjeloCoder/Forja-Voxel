@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast'
 import Navbar from './componentes/layout/Navbar';
 import HomePage from './pages/HomePage'; 
 import ProductsPage from './pages/ProductsPage';
@@ -8,6 +9,18 @@ import Footer from './componentes/layout/Footer';
 function App() {
   return (
     <Router>
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: 'var(--color-dark-grey)',
+            color: 'var(--color-white)',
+            border: '2px solid var(--color-red)',
+            fontFamily: 'var(--font-pixel)',
+            fontSize: '0.8rem',
+          },
+        }}
+      />
       <Navbar />
       <main>
         <Routes>

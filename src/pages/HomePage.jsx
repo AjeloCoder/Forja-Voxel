@@ -13,6 +13,7 @@ function HomePage() {
         Ver Productos
       </Link>
     </div>
+    
   );
 }
 

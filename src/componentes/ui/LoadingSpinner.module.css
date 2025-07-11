@@ -1,0 +1,75 @@
+.spinnerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.loadingText {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--color-dark-grey);
+}
+
+.anvilAndHammer {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+/* El Yunque, construido con píxeles (box-shadow) */
+.anvil {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 10px;  /* Este es el pixel "principal" */
+  height: 10px;
+  background: var(--color-dark-grey);
+  /* Dibuja el resto del yunque con sombras relativas al pixel principal */
+  box-shadow: 
+    /* Base del yunque */
+    0px 10px 0 0 var(--color-dark-grey),
+    10px 10px 0 0 var(--color-dark-grey),
+    20px 10px 0 0 var(--color-dark-grey),
+    30px 10px 0 0 var(--color-dark-grey),
+    40px 10px 0 0 var(--color-dark-grey),
+    50px 10px 0 0 var(--color-dark-grey),
+    /* Cuerpo superior */
+    -10px 0px 0 0 var(--color-dark-grey),
+    -10px -10px 0 0 var(--color-dark-grey),
+    0px -10px 0 0 var(--color-dark-grey),
+    10px -10px 0 0 var(--color-dark-grey),
+    20px -10px 0 0 var(--color-dark-grey),
+    30px -10px 0 0 var(--color-dark-grey),
+    40px -10px 0 0 var(--color-dark-grey),
+    50px -10px 0 0 var(--color-dark-grey),
+    60px -10px 0 0 var(--color-dark-grey),
+    70px -10px 0 0 var(--color-dark-grey);
+}
+
+/* El Martillo, también con box-shadow */
+.hammer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--color-dark-grey); /* Mango */
+  box-shadow: /* Cabeza del martillo */
+    0 -10px 0 0 var(--color-red),
+    -10px -10px 0 0 var(--color-red),
+    10px -10px 0 0 var(--color-red);
+  
+  animation: pixelStrike 0.7s infinite ease-in-out;
+}
+
+/* Nueva animación de golpeo, más natural */
+@keyframes pixelStrike {
+  0%, 100% {
+    transform: translate(10px, 0px) rotate(45deg);
+  }
+  50% {
+    transform: translate(-25px, 50px) rotate(-45deg); /* Golpe hacia abajo y a la izquierda */
+  }
+}
