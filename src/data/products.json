@@ -5,7 +5,7 @@
     "description": "Tu nombre o logo en un llavero de estilo pixel art. Resistente y único.",
     "price": 8.99,
     "category": "accesorios",
-    "image": "https://i.imgur.com/example1.png"
+    "image": "Llavero.jpeg"
   },
   {
     "id": "fv002",
@@ -13,7 +13,7 @@
     "description": "Un soporte robusto con diseño geométrico para tus cascos. Mantén tu setup ordenado.",
     "price": 24.50,
     "category": "gaming",
-    "image": "https://i.imgur.com/example2.png"
+    "image": "Soporte.jpeg"
   },
   {
     "id": "fv003",
@@ -21,7 +21,7 @@
     "description": "Envíanos tu foto y la convertiremos en una mágica litofanía 3D que se revela con la luz.",
     "price": 19.99,
     "category": "decoracion",
-    "image": "https://i.imgur.com/example3.png"
+    "image": "Ilustracion.jpeg"
   },
   {
     "id": "fv004",
@@ -29,6 +29,6 @@
     "description": "Figuras inspiradas en tus videojuegos retro favoritos, impresas con detalle.",
     "price": 15.00,
     "category": "figuras",
-    "image": "https://i.imgur.com/example4.png"
+    "image": "Figuras.jpeg"
   }
 ]

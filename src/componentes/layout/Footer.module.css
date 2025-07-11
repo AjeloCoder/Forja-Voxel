@@ -1,0 +1,84 @@
+/* src/componentes/layout/Footer/Footer.module.css */
+
+.siteFooter {
+  background-color: #212121;
+  color: #ffffff;
+  padding: 2rem 1rem;
+  border-top: 2px solid #444;
+  font-family: 'Press Start 2P', monospace; /* Reemplaza con tu fuente pixelada si es otra */
+  text-align: center;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footerLogo {
+  flex-basis: 150px;
+}
+
+.alejoLogo { /* Le añadí una clase a la imagen para poder darle estilo */
+  max-width: 100px;
+  image-rendering: pixelated;
+}
+
+.footerSocialLinks {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-grow: 1;
+  width: 5rem;;
+}
+
+.socialLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+}
+
+.socialLink:hover {
+  color: #ff4757;
+}
+
+.footerCopyright {
+  flex-basis: 100%;
+  margin-top: 1rem;
+}
+
+.footerCopyright p {
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+  color: #a0a0a0;
+}
+
+.socialIcon {
+  width: 50px;  /* Ajusta el tamaño como prefieras */
+  height: 50px;
+  image-rendering: pixelated; /* ¡Muy importante para mantener el estilo pixel art! */
+  vertical-align: middle; /* Ayuda a alinear si hubiera texto al lado */
+  transition: transform 0.2s ease-in-out; /* Animación suave para el hover */
+}
+
+/* Efecto al pasar el ratón por encima del enlace */
+.socialLink:hover .socialIcon {
+  transform: scale(1.15); /* El icono se agranda un poco */
+}
+
+/* El estilo .socialLink:hover que tenías antes ya no es necesario, pero no hace daño dejarlo */
+.socialLink:hover {
+  /* La propiedad color ya no tiene efecto visible, pero la dejamos por si acaso */
+  color: #ff4757;
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+  }
+}

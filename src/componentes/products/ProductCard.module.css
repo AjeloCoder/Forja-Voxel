@@ -1,0 +1,68 @@
+/* src/componentes/products/ProductCard.module.css */
+
+.card {
+  background-color: #f0f0f0;
+  border: 4px solid #212121;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 8px 8px 0px #212121; /* Efecto 3D pixelado */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0px #212121;
+}
+
+.imageContainer {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Mantiene la imagen cuadrada */
+  background-color: #fff;
+  border: 3px solid #212121;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Asegura que la imagen se vea completa */
+  image-rendering: pixelated;
+}
+
+.productName {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.2rem;
+  color: #212121;
+  margin: 0.5rem 0;
+}
+
+.productPrice {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1rem;
+  color: #ff4757;
+  font-weight: bold;
+  margin: 0 0 1rem 0;
+}
+
+.addToCartButton {
+  font-family: 'Press Start 2P', monospace;
+  background-color: #ff4757;
+  color: white;
+  border: 4px solid #212121;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.addToCartButton:hover {
+  background-color: #e84150;
+}

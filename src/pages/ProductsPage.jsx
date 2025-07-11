@@ -1,36 +1,46 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import ProductCard from '../componentes/ui/ProductCard';
-import productsData from '../data/products.json';
+import productsDataFromFile  from '../data/products.json';
 import styles from './ProductsPage.module.css';
+import Llavero from '../assets/imagenes/Llavero.jpeg'
+import Figuras from '../assets/imagenes/Figuras.jpeg'
+import Ilustracion from '../assets/imagenes/Ilustracion.jpeg'
+import Soporte from '../assets/imagenes/Soporte.jpeg'
 
-function ProductsPage() {
-  // useParams nos permite leer parámetros de la URL, como :categoryId
-  const { categoryId } = useParams();
+const imageMap = {
+  'Llavero.jpeg': Llavero,
+  'Figuras.jpeg': Figuras,
+  'Ilustracion.jpeg': Ilustracion,
+  'Soporte.jpeg': Soporte,
+};
 
-  const filteredProducts = categoryId
-    ? productsData.filter(p => p.category === categoryId)
-    : productsData;
+console.log('Datos cargados del JSON:', productsDataFromFile);
+console.log('Mapa de imágenes construido:', imageMap);
+// 4. Prepara los datos finales: combina la info del JSON con las imágenes correctas.
+//    Usamos .map() para crear un nuevo array donde la propiedad 'image' es el módulo importado, no solo el string.
+const productsData = productsDataFromFile.map(product => {
+  // Para cada producto, comprobamos si su imagen existe en nuestro mapa
+  if (!imageMap[product.image]) {
+    console.error(`¡Error! No se encontró la imagen para el producto: ${product.name}. Se esperaba el archivo llamado "${product.image}"`);
+  }
   
-  // Título dinámico
-  const pageTitle = categoryId 
-    ? categoryId.charAt(0).toUpperCase() + categoryId.slice(1) 
-    : 'Todos nuestros productos';
+  return {
+    ...product,
+    image: imageMap[product.image] // Asigna la imagen importada correcta
+  };
+});
 
+export default function ProductsPage() {
   return (
     <div className={styles.pageContainer}>
-      <h1 className={styles.pageTitle}>{pageTitle}</h1>
-      {filteredProducts.length > 0 ? (
-        <div className={styles.productList}>
-          {filteredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      ) : (
-        <p>No se encontraron productos en esta categoría.</p>
-      )}
+      <h1 className={styles.pageTitle}>Nuestros Productos</h1>
+      
+      <div className={styles.productsGrid}>
+        {/* 5. El resto del código no cambia. Sigue mapeando sobre 'productsData' como antes. */}
+        {productsData.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }
-
-export default ProductsPage;

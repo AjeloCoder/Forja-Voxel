@@ -3,6 +3,7 @@ import Navbar from './componentes/layout/Navbar';
 import HomePage from './pages/HomePage'; 
 import ProductsPage from './pages/ProductsPage';
 import CartPage from './pages/CartPage';
+import Footer from './componentes/layout/Footer';
 
 function App() {
   return (
@@ -10,7 +11,6 @@ function App() {
       <Navbar />
       <main>
         <Routes>
-          {/* Aquí definiremos las rutas a nuestras páginas */}
          <Route path="/" element={<HomePage />} />
          <Route path="/productos" element={<ProductsPage />} />
           <Route path="/category/:categoryId" element={<ProductsPage />} />
@@ -19,7 +19,9 @@ function App() {
           <Route path="/carrito" element={<CartPage />} />
         </Routes>
       </main>
-      {/* Podríamos añadir un Footer aquí en el futuro */}
+
+      <Footer/ >
+      
     </Router>
   );
 }
