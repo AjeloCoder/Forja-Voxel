@@ -1,3 +1,16 @@
+* {
+  box-sizing: border-box; /* Una de las mejores prácticas de CSS */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root, .app-container {
+  height: 100%;
+}
 
 :root {
   --color-red: #ff1100; 
@@ -30,6 +43,7 @@ img {
   padding: 10px 15px;
   font-family: var(--font-pixel);
   cursor: pointer;
+  margin-top: 2.5rem;
   box-shadow: 4px 4px 0px var(--color-dark-grey);
   transition: all 0.1s ease-in-out;
 }

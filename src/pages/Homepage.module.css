@@ -1,43 +1,101 @@
+/* --- Contenedor Principal --- */
 .heroContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+   width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start; 
+  padding-top: 20vh;
+  align-items: center;
+  padding: 2rem;
+  animation: riseUp 2s ease-out forwards;
+}
+
+/* --- Fondo de Estrellas Animado (si no usas imagen) --- */
+/* Esta técnica usa box-shadow para crear múltiples "píxeles" */
+.heroContainer::before,
+.heroContainer::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle linear infinite;
+  opacity: 0;
+}
+/* Estrellas pequeñas */
+.heroContainer::before {
+  box-shadow: 10vw -40vh 0 0 white, 30vw 20vh 0 0 white, 50vw -10vh 0 0 white,
+    70vw 30vh 0 0 white, 90vw -20vh 0 0 white;
+  animation-duration: 3s;
+}
+/* Estrellas grandes (usando el after) */
+.heroContainer::after {
+  box-shadow: 5vw 10vh 0 0 white, 25vw -30vh 0 0 white, 45vw 5vh 0 0 white,
+    65vw -15vh 0 0 white, 85vw 25vh 0 0 white;
+  animation-duration: 4s; /* Duración diferente para que no parpadeen a la vez */
+  animation-delay: 0.5s;
+}
+
+@keyframes sparkle {
+  0% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(2); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+
+/* --- Animación de Ascenso del Título --- */
+
+
+@keyframes riseUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px); /* Ajustamos el inicio de la animación */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.titleContainer {
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 85px); 
-  padding: 2rem;
-  text-align: center;
+  transform: translateY(+200px); 
 }
 
 .title {
   font-size: 5rem;
-  color: var(--color-dark-grey);
+  color: #e74c3c;
+  text-shadow: 5px 5px 0px var(--color-white);
   margin: 0;
   line-height: 1.1;
-  text-shadow: 5px 5px 0px var(--color-red);
+  z-index: 2;
 }
 
-.slogan {
-  font-size: 1.2rem;
-  color: var(--color-dark-grey);
-  margin-top: 1rem;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
-}
 
+/* --- Botón "PRESS START" --- */
 .ctaButton {
-  font-size: 1.2rem;
-  padding: 15px 30px;
+  font-size: 1.5rem; 
+  padding: 15px 35px;
+  margin-top: 2rem;
+  opacity: 1; /* ¡Importante! */
+  animation: blink 1.5s step-start infinite;
+  z-index: 2;
 }
 
-@media (max-width: 768px) {
-  .title {
-    font-size: 3.5rem;
-    text-shadow: 3px 3px 0px var(--color-red);
-  }
-  .slogan {
-    font-size: 1rem;
-  }
-  .ctaButton {
-    font-size: 1rem;
+.blinking {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
+

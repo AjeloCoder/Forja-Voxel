@@ -1,36 +1,40 @@
 import alejoLogo from '../../assets/imagenes/Logo-Alejo.png';
-import instagramIcon from '../../assets/imagenes/instagram.png'
-import githubIcon from '../../assets/imagenes/github.png'
-import linkedinIcon from '../../assets/imagenes/linkedin.png'
+import { FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
 import styles from './Footer.module.css';
+import { useState } from 'react';
 
-function Footer() {
-  const currentYear = new Date().getFullYear();
 
-  return (
-    <footer id="site-footer" className={styles.siteFooter}>
-      <div className={styles.footerContent}>
-        <div className={styles.footerLogo}>
-          <img src={alejoLogo} alt="Logo Ajelo Bermudez" id="alejo-logo" className={styles.alejoLogo} />
-        </div>
-        <div className={styles.footerSocialLinks}>
-          <a href="http://instagram.com/forjavoxel/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} title="Instagram Ajelo Bermudez">
-             <img src={instagramIcon} alt="Ícono de Instagram" className={styles.socialIcon} />
-          </a>
-          <a href="https://github.com/AjeloCoder?tab=repositories" target="_blank" rel="noopener noreferrer" className={styles.socialLink} title="GitHub AjeloCoder">
-             <img src={githubIcon} alt="Ícono de GitHub" className={styles.socialIcon} />
-          </a>
-          <a href="https://www.linkedin.com/in/ajelobermudez/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} title="LinkedIn Ajelo Bermudez">
-             <img src={linkedinIcon} alt="Ícono de LinkedIn" className={styles.socialIcon} />
-          </a>
-        </div>
-        <div className={styles.footerCopyright}>
-          <p>© {currentYear} Ajelo Bermúdez. Todos los derechos reservados.</p>
+function Footer({ isHomePage }) { // Recibimos isHomePage
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  if (!isHomePage) {
+    return (
+      <footer id="site-footer" className={styles.footerSolid}>
+        
+      </footer>
+    );
+  }
+
+   return (
+    <footer id="site-footer" className={styles.footerTransparent}>
+      <button onClick={toggleMenu} className={styles.personalLogo}>
+        <img src={alejoLogo} alt="Logo de Alejo Bermúdez" />
+      {isMenuOpen && (
+        <div className={styles.socialMenu}>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+          <a href="https://github.com/AjeloCoder" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+          <a href="http://instagram.com/forjavoxel/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
         </div>
-      </div>
+      )}
+      </button>
     </footer>
   );
 }
 
+
 export default Footer;
+

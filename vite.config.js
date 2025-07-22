@@ -1,11 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Forja-Voxel/', 
+  // Esta es la ruta para el BUILD. Asegura que en producción todo funcione.
+  base: '/Forja-Voxel/',
   server: {
-    open: '/', 
-  }
-})
+    // Esto asegura que al hacer 'npm run dev', el navegador se abra en http://localhost:XXXX/
+    // y el HMR (Websocket) funcione correctamente.
+    open: '/',
+  },
+});

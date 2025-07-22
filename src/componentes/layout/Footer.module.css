@@ -1,3 +1,42 @@
+.footer {
+  color: var(--color-white); /* Asumiendo que el texto debe ser blanco ahora */
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 0.8rem;
+  
+  /* Añadimos una sutil sombra al texto para que se lea mejor sobre la imagen */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.footerTransparent {
+  /* ¡CAMBIO CLAVE! Usamos 'fixed' para pegarlo a la ventana */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Un z-index alto para estar por encima de todo */
+
+  /* El resto de estilos para alinear los hijos internos */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  
+  /* Hacemos el fondo del footer explícitamente transparente */
+  background: transparent;
+}
+
+.socialIcons a svg {
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+
 .siteFooter {
   background-color: #212121;
   color: #ffffff;
@@ -7,23 +46,80 @@
   text-align: center;
 }
 
-.footerContent {
-  max-width: 1200px;
-  margin: 0 auto;
+
+
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px); /* Empieza un poco abajo y se desliza hacia arriba */
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.personalLogo {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 100px; /* Tamaño fijo para el contenedor del logo */
+  height: 100px;
+  animation: pulseGlow 3s infinite ease-in-out;
+  position: relative; 
+  z-index: 100;
+}
+
+.personalLogo img {
+  width: 100%; /* ¡LA SOLUCIÓN! La imagen ocupa el 100% de su padre (.personalLogo) */
+  height: auto;
+  display: block; /* Evita espacios extra debajo de la imagen */
+  image-rendering: pixelated; /* Mantiene el look pixelado */
+}
+
+.socialMenu {
+  position: absolute; /* Se posiciona de forma absoluta */
+  bottom: 100%; /* El borde inferior del menú toca el borde superior del botón */
+  left: 50%;     /* Lo movemos al centro horizontal del botón */
+  transform: translateX(-50%);
+  align-items: center; /* Ajuste fino para un centrado perfecto */
+  background: none;
+  border: none;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.5rem;
+  flex-direction: column; /* Apila los iconos verticalmente */
+  align-items: center; /* Centra los iconos si tuvieran anchos diferentes */
+  gap: 1.5rem; /* Espacio entre los iconos */
+  padding-bottom: 1rem; /* Un pequeño margen para que no esté pegado al logo */
+  animation: slideUp 0.3s ease-out forwards;
 }
 
-.footerLogo {
-  flex-basis: 150px;
+.socialMenu a {
+  color: var(--color-red);
+  transition: all 0.2s;
+  /* Añadimos una sombra sutil para que destaquen sobre el fondo */
+  text-shadow: 0 0 8px rgba(0,0,0,0.9);
+}
+.socialMenu a:hover {
+  color: var(--color-white);
+  transform: scale(1.1);
 }
 
-.alejoLogo {
-  max-width: 100px;
-  image-rendering: pixelated;
+.socialMenu a svg {
+  font-size: 2.5rem; /* Un buen tamaño para los iconos */
+  display: block;
+}
+
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(1.5);
+    transform: scale(1.05);
+  }
 }
 
 .footerSocialLinks {
@@ -34,39 +130,7 @@
   width: 5rem;;
 }
 
-.socialLink {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.2s ease-in-out;
-}
 
-.socialLink:hover {
-  color: #ff4757;
-}
-
-.footerCopyright {
-  flex-basis: 100%;
-  margin-top: 1rem;
-}
-
-.footerCopyright p {
-  margin: 0.5rem 0;
-  font-size: 0.8rem;
-  color: #a0a0a0;
-}
-
-.socialIcon {
-  width: 50px;  
-  height: 50px;
-  image-rendering: pixelated; 
-  vertical-align: middle; 
-  transition: transform 0.2s ease-in-out; 
-}
-
-.socialLink:hover .socialIcon {
-  transform: scale(1.15); 
-}
 
 @media (max-width: 768px) {
   .footerContent {

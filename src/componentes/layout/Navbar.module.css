@@ -1,4 +1,4 @@
-.navbar {
+.navbarSolid {
   background-color: var(--color-dark-grey);
   padding: 1rem 2rem;
   position: sticky;
@@ -7,37 +7,99 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+.navbarTransparent {
+  /* Hacemos el fondo transparente */
+  background-color: transparent; 
+  /* Le quitamos la sombra que ya no tiene sentido */
+  box-shadow: none;
+  
+  /* Lo sacamos del flujo normal y lo fijamos arriba */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100; /* Aseguramos que esté por encima de todo */
+
+  /* Añadimos un padding para que no esté pegado a los bordes */
+  padding: 1rem 2rem;
+  box-sizing: border-box; /* Importante al usar padding con width: 100% */
+}
+
 .navContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  /* Crea 3 columnas: La 1ra y la 3ra ocupan lo que necesiten, la del medio se estira */
+  grid-template-columns: auto 1fr auto; 
+  align-items: center; /* Centra todo verticalmente en sus celdas */
+  width: 100%; /* Asegura que la grilla ocupe todo el espacio del navbar */
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.logo {
-  height: 80px;
-  image-rendering: pixelated;
-  transition: transform 0.2s ease-in-out;
+.navLinksDesktop {
+  /* ¡LA MAGIA! Esto empuja los links al centro y los iconos a la derecha */
+  margin-left: auto;
+  margin-right: 2rem; /* Espacio entre los links y los iconos */
+
+  /* El resto de sus estilos se mantienen (display, list-style, gap, etc.) */
+  display: none; 
+  /* ... */
 }
 
+.navContainer {
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* Mantenemos las 3 columnas */
+  align-items: center;
+  /* ... */
+}
+
+.rightIconsWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-self: end; /* ¡Clave! Alinea todo el grupo a la derecha */
+}
+
+.navbarTransparent .logoLink:hover::after {
+  opacity: 1;
+}
+
+/* También le damos un pequeño brillo al propio ícono */
+.navbarTransparent .logoLink:hover .logo {
+    filter: brightness(1.2);
+}
+
+.logo {
+  height: 140px;
+  image-rendering: pixelated;
+  transition: filter 0.3s ease;
+  /* Le damos un display: block para evitar espacios extra debajo */
+  display: block; 
+}
+
+.logoLink {
+  /* No necesita cambios, se ubicará en la primera celda */
+  justify-self: start; /* Opcional: asegura que se alinee al inicio */
+}
 
 .logo:hover {
   transform: scale(1.1);
 }
 
 
-.navLinksDesktop {
-  display: none; 
+.navLinksDesktop { 
+  list-style: none;
+  display: flex;
+  justify-content: center; 
+  gap: 2rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 2rem;
   align-items: center;
+  font-size: 50px;
 }
 
 .navLinksDesktop a {
-  color: var(--color-white);
+  color: var(--color-red);
   text-decoration: none;
   font-size: 0.8rem;
   transition: color 0.2s ease-in-out;
@@ -48,16 +110,8 @@
   color: var(--color-red);
 }
 
-.iconsContainer {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  color: var(--color-white);
-  font-size: 1.5rem;
-}
 
 .cartIconContainer {
-  position: relative;
   color: var(--color-white);
   transition: color 0.2s ease-in-out;
 }
@@ -66,14 +120,13 @@
 }
 
 .cartBadge {
-  position: absolute;
   top: -8px;
   right: -12px;
   background-color: var(--color-red);
   color: var(--color-white);
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,6 +198,35 @@
   background-color: var(--color-white);
 }
 
+.muteButton {
+  background: transparent;
+  border: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0; /* Quitamos cualquier padding */
+}
+
+/* El icono SVG dentro del botón */
+.muteButton svg {
+  color: var(--color-white);
+  font-size: 2rem; /* Hacemos el icono un poco más grande */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efecto de hover: sombra pixelada y color rojo */
+.muteButton:hover svg {
+  color: var(--color-red);
+  
+}
+
+.muteButton:active svg {
+  transform: scale(0.9); /* Efecto de presionado */
+}
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
