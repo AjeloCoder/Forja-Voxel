@@ -1,12 +1,19 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/UseCart';
 import { FaTrash } from 'react-icons/fa';
 import styles from './CartPage.module.css';
 import QuantitySelector from '../componentes/ui/QuantitySelector'
+import { createOrder } from '../componentes/services/ProductService';
 import toast from 'react-hot-toast';
 
 function CartPage() {
-  const { items, removeItem, addItem, decreaseQuantity  } = useCart(); 
+  const { items, removeItem, addItem, decreaseQuantity, clearCart } = useCart(); 
+  const navigate = useNavigate(); // 4. Inicializa el hook de navegación
+  
+  // 5. Un estado para gestionar la carga durante el checkout
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
   const handleRemove = (itemId, itemName) => {
     removeItem(itemId);
     toast.error(`${itemName} eliminado.`, { icon: '🗑️' });
@@ -16,9 +23,48 @@ function CartPage() {
   }, 0);
 
 
-  const handleCheckout = () => {
-    alert('¡Gracias por tu compra! (Función de checkout en desarrollo)');
-    
+   const handleCheckout = async () => {
+    setIsCheckingOut(true); // Muestra feedback de carga
+
+    // Preparamos los datos del comprador (simulados por ahora)
+    const buyerData = {
+      name: 'Alejo Coder',
+      phone: '123456789',
+      email: 'alejo@coder.com'
+    };
+
+    // Preparamos los items de la orden de forma simplificada
+    const orderItems = items.map(item => ({
+      id: item.id,
+      title: item.name,
+      price: item.price,
+      quantity: item.quantity,
+    }));
+
+    // El objeto final de la orden
+    const order = {
+      buyer: buyerData,
+      items: orderItems,
+      total: totalPrice,
+    };
+
+    try {
+      const orderId = await createOrder(order);
+      
+      // ¡TODO SALIÓ BIEN!
+      clearCart();
+      toast.success(`¡Gracias por tu compra! Tu orden es #${orderId.substring(0, 6)}`);
+      
+      // Redirigimos al usuario al home después de 3 segundos
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+
+    } catch (error) {
+      toast.error('Hubo un error al procesar tu orden. Intenta de nuevo.');
+    } finally {
+      setIsCheckingOut(false); // Oculta el feedback de carga
+    }
   };
 
   // ---- Vista para Carrito Vacío ----
@@ -81,9 +127,14 @@ function CartPage() {
             <span>Total</span>
             <span>${totalPrice.toFixed(2)}</span>
           </div>
-          <button className="pixel-button" onClick={handleCheckout} style={{width: '100%'}}>
-            Finalizar Compra
-          </button>
+             <button 
+          className="pixel-button" 
+          onClick={handleCheckout} 
+          disabled={isCheckingOut} // Se deshabilita mientras se procesa
+          style={{width: '100%'}}
+        >
+          {isCheckingOut ? 'Forjando Orden...' : 'Finalizar Compra'}
+        </button>
         </div>
       </div>
     </div>

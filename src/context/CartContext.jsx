@@ -44,5 +44,10 @@ export const cartReducer = (state, action) => {
 
     default:
       throw new Error(`Acción desconocida en cartReducer: ${action.type}`);
-  }
+      
+      case CART_ACTIONS.CLEAR_CART: {
+        return { ...state, items: [] }; // Devuelve el estado con el array de items vacío
+      }
+    }
+
 };

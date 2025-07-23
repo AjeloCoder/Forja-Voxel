@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
-// Importamos nuestros componentes y hooks
 import Navbar from './componentes/layout/Navbar';
 import Footer from './componentes/layout/Footer';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import CartPage from './pages/CartPage';
+import ItemDetailPage from './pages/ItemDetailPage';
+import NotFoundPage from './pages/NotFoundPage';
 import { useSettings } from './context/SettingsContext';
 
 // Importamos los estilos
@@ -46,9 +46,11 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/productos" element={<ProductsPage />} />
           <Route path="/category/:categoryId" element={<ProductsPage />} />
+           <Route path="/item/:itemId" element={<ItemDetailPage />} />
           <Route path="/nosotros" element={<div><h1>El Taller</h1></div>} />
           <Route path="/contacto" element={<div><h1>Encargos Especiales</h1></div>} />
           <Route path="/carrito" element={<CartPage />} />
+           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer isHomePage={isHomePage} />

@@ -45,6 +45,44 @@
   /* ... */
 }
 
+.navLinksDesktop a, .navLinksMobile a {
+  color: var(--color-white); /* Color base de los enlaces */
+  text-decoration: none;
+  font-size: 0.9rem; /* Puedes ajustar el tamaño si quieres */
+  transition: color 0.2s ease-in-out;
+  padding: 0.5rem; /* Añade un poco de área de clic */
+  position: relative; /* Para el subrayado animado */
+}
+
+/* --- ESTILO PARA EL LINK ACTIVO --- */
+/* Esta clase se aplica gracias a NavLink cuando la ruta coincide */
+.navLinksDesktop a.active, .navLinksMobile a.active {
+  color: var(--color-red);
+}
+
+
+/* --- (Opcional pero muy pro) Efecto de hover con subrayado animado --- */
+.navLinksDesktop a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; /* Empieza sin ancho */
+  height: 2px; /* Grosor del subrayado */
+  background-color: var(--color-red);
+  transition: width 0.3s ease-out; /* Animación */
+}
+
+/* Al hacer hover, el subrayado se expande desde el centro */
+.navLinksDesktop a:hover::after {
+  width: 100%;
+}
+
+/* Forzamos que el link activo SIEMPRE tenga el subrayado */
+.navLinksDesktop a.active::after {
+  width: 100%;
+}
 .navContainer {
   display: grid;
   grid-template-columns: auto 1fr auto; /* Mantenemos las 3 columnas */

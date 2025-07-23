@@ -1,0 +1,34 @@
+.container {
+  flex-grow: 1; /* Ocupa el espacio vertical */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-dark-grey); /* Usamos el gris oscuro para contraste */
+}
+
+.errorCode {
+  font-size: 10rem;
+  color: var(--color-red);
+  text-shadow: 6px 6px 0 var(--color-dark-grey);
+  margin: 0;
+  line-height: 1;
+}
+
+.message {
+  font-size: 2rem;
+  margin-top: 1.5rem;
+}
+
+.subMessage {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 3rem;
+  max-width: 400px;
+}
+
+.homeButton {
+  font-size: 1.2rem;
+}
