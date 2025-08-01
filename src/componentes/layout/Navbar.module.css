@@ -21,8 +21,7 @@
   z-index: 100; /* Aseguramos que esté por encima de todo */
 
   /* Añadimos un padding para que no esté pegado a los bordes */
-  padding: 1rem 2rem;
-  box-sizing: border-box; /* Importante al usar padding con width: 100% */
+  padding: 1rem 2rem; /* Importante al usar padding con width: 100% */
 }
 
 .navContainer {
@@ -41,15 +40,13 @@
 
 /* --- MENÚ PARA ESCRITORIO --- */
 .navLinksDesktop {
-  display: none !important; /* OCULTO en móvil por defecto */
+  display: none; /* OCULTO en móvil por defecto */
   list-style: none;
   top: 100%;
   margin: 0;
   padding: 2rem 0;
-  background-color: rgba(20, 20, 20, 0.95); /* Negro casi opaco con efecto blur */
-  backdrop-filter: blur(5px);
-  display: flex;
-  flex-direction: column;
+   /* Negro casi opaco con efecto blur */
+  
   justify-content: center;
   gap: 2rem;
   
@@ -68,7 +65,7 @@
 .hamburger {
   cursor: pointer;
   font-size: 1.5rem; /* Ajusta el tamaño si es necesario */
-  display: block !important;
+  display: block;
 }
 
 
@@ -87,15 +84,18 @@
   list-style: none;
   padding: 2rem 0;
   margin: 0;
-
-  display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 2rem;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   /* Animación de entrada: desliza desde arriba */
   transform: translateY(-100%);
   animation: slideDown 0.4s ease-out forwards;
+}
+.dropdownMenu{
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes slideDown {
@@ -139,12 +139,12 @@
 @media (min-width: 768px) {
   /* Mostramos los links de escritorio */
   .navLinksDesktop {
-    display: flex !important; 
+    display: flex; 
   }
 
   /* Ocultamos el icono de hamburguesa */
   .hamburger {
-    display: none !important; 
+    display: none; 
   }
   
   /* Nos aseguramos que el menú desplegable móvil nunca se vea en escritorio */
@@ -253,18 +253,19 @@
   background-color: var(--color-red);
   color: var(--color-white);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.7rem;
-  border: 2px solid var(--color-dark-grey);
+  border: 4px solid var(--color-black);
 }
 
 .hamburger {
   cursor: pointer;
   display: block; 
+  color: var(--color-white);
 }
 
 
@@ -307,6 +308,11 @@
 @media (min-width: 768px) {
   .navLinksDesktop {
     display: flex; 
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    flex-direction: row;
+    background-color: transparent;
   }
   .hamburger {
     display: none; 

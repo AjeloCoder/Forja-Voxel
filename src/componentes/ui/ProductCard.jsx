@@ -1,4 +1,4 @@
-import { useCart } from '../../context/UseCart';
+
 import styles from './ProductCard.module.css';
 import React from 'react';
 import { Link } from 'react-router-dom';

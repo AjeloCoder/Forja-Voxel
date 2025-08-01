@@ -6,7 +6,7 @@ import { FaVolumeUp, FaVolumeMute, FaBars, FaTimes, FaShoppingCart } from 'react
 import logoIcon from '../../assets/imagenes/logo-icon.png';
 import styles from './Navbar.module.css';
 
-
+const categories = ['accesorios', 'gaming', 'decoracion', 'figuras'];
 
 function Navbar({ 
   isHomePage, 
@@ -19,6 +19,7 @@ function Navbar({
   const { items } = useCart();
   const totalItemsInCart = items.reduce((sum, item) => sum + item.quantity, 0);
 
+  const { isPlaying, toggleMusic } = useSettings(); 
   
    const closeMenus = closeAllMenus;
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -89,8 +90,8 @@ function Navbar({
         <ul className={styles.navLinksMobile}>
           {/* Aquí podrías replicar la lógica del dropdown si quisieras en el futuro */}
           <li onClick={toggleMobileMenu}><NavLink to="/productos">Productos</NavLink></li>
-          <li onClick={toggleMobileMenu}><NavLink to="/nosotros">Nosotros</NavLink></li>
-          <li onClick={toggleMobileMenu}><NavLink to="/contacto">Contacto</NavLink></li>
+          <li onClick={toggleMobileMenu}><NavLink to="/nosotros">El Taller</NavLink></li>
+          <li onClick={toggleMobileMenu}><NavLink to="/contacto">Encargos Especiales</NavLink></li>
         </ul>
       )}
       </div>

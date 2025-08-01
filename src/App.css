@@ -19,7 +19,7 @@ main {
   /* Usamos la imagen correcta según el tamaño de la pantalla */
   background-image: url('/images/DarkSky.jpeg'); /* Default (móvil) */
   background-size: cover;
-  
+  background-repeat: no-repeat;
   /* ¡LA CLAVE! La posición en Y es al 75% desde arriba (enfoca la forja) */
   background-position: 55%;
   
@@ -27,12 +27,20 @@ main {
   transition: all 0.3s ease;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1000px){
   .home-background-image {
     background-image: url('/images/DarkSky2.jpeg');
     /* ¡LA CLAVE! En escritorio, queremos más zoom, movemos el foco más arriba */
     background-size: 100%; /* Prueba 120%, 150%, 180%... */
-    background-position: center 70%; /* Y reajustamos la posición vertical */
+    background-position: center; /* Y reajustamos la posición vertical */
+  }
+}
+@media (min-height: 1000px){
+  .home-background-image {
+    background-image: url('/images/DarkSky.jpeg');
+    /* ¡LA CLAVE! En escritorio, queremos más zoom, movemos el foco más arriba */
+    background-size: 150%; /* Prueba 120%, 150%, 180%... */
+    background-position: center; /* Y reajustamos la posición vertical */
   }
 }
 

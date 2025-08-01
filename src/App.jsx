@@ -8,6 +8,7 @@ import ProductsPage from './pages/ProductsPage';
 import CartPage from './pages/CartPage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
+import { useSettings } from './context/SettingsContext';
 import './App.css';
 
 // Componente intermediario para poder usar hooks de routing y contexto
@@ -15,6 +16,7 @@ function AppContent() {
   const location = useLocation(); 
   const isHomePage = location.pathname === '/';
 
+   const { isPlaying, toggleMusic } = useSettings();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -35,7 +37,7 @@ function AppContent() {
     if (!isHomePage && isPlaying) {
       toggleMusic();
     }
-  }, [isHomePage]);
+  }, [isHomePage, isPlaying, toggleMusic ]);
 
   return (
     <div className="app-container">

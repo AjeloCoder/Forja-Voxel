@@ -91,7 +91,7 @@
 .socialMenu {
   position: absolute; /* Se posiciona de forma absoluta */
   bottom: 100%; /* El borde inferior del menú toca el borde superior del botón */
-  left: 50%;     /* Lo movemos al centro horizontal del botón */
+  left: 30%;     /* Lo movemos al centro horizontal del botón */
   transform: translateX(-50%);
   align-items: center; /* Ajuste fino para un centrado perfecto */
   background: none;
