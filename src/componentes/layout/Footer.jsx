@@ -1,4 +1,4 @@
-import alejoLogo from '../../assets/imagenes/Logo-Alejo.png';
+import alejoLogo from '../../assets/imagenes/Logo-alejov2.png';
 import { FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
 import styles from './Footer.module.css';
 import { useState } from 'react';
@@ -21,6 +21,7 @@ function Footer({ isHomePage }) { // Recibimos isHomePage
 
    return (
     <footer id="site-footer" className={styles.footerTransparent}>
+        <div className={styles.logoContainer}>
       <button onClick={toggleMenu} className={styles.personalLogo}>
         <img src={alejoLogo} alt="Logo de Alejo Bermúdez" />
       {isMenuOpen && (
@@ -31,6 +32,7 @@ function Footer({ isHomePage }) { // Recibimos isHomePage
         </div>
       )}
       </button>
+      </div>
     </footer>
   );
 }

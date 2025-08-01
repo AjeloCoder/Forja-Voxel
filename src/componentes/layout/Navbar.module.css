@@ -35,14 +35,122 @@
   margin: 0 auto;
 }
 
-.navLinksDesktop {
-  /* ¡LA MAGIA! Esto empuja los links al centro y los iconos a la derecha */
-  margin-left: auto;
-  margin-right: 2rem; /* Espacio entre los links y los iconos */
+/* src/components/layout/Navbar.module.css */
+/* ... tus estilos existentes ... */
 
-  /* El resto de sus estilos se mantienen (display, list-style, gap, etc.) */
-  display: none; 
-  /* ... */
+
+/* --- MENÚ PARA ESCRITORIO --- */
+.navLinksDesktop {
+  display: none !important; /* OCULTO en móvil por defecto */
+  list-style: none;
+  top: 100%;
+  margin: 0;
+  padding: 2rem 0;
+  background-color: rgba(20, 20, 20, 0.95); /* Negro casi opaco con efecto blur */
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  
+}
+
+
+/* --- CONTENEDOR DE ICONOS DERECHA --- */
+.rightIconsWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-self: end;
+}
+
+/* El icono de hamburguesa VISIBLE en móvil por defecto */
+.hamburger {
+  cursor: pointer;
+  font-size: 1.5rem; /* Ajusta el tamaño si es necesario */
+  display: block !important;
+}
+
+
+/* --- MENÚ DESPLEGABLE MÓVIL (cuando se abre) --- */
+.navLinksMobile {
+  /* ¡LA CLAVE! Lo sacamos del flujo normal del documento */
+  position: absolute;
+  top: 100%; /* Empieza justo debajo del navbar */
+  left: 0;
+  width: 100%;
+  
+  /* Le damos un fondo para que sea legible sobre la imagen */
+   /* Negro casi opaco con efecto blur */
+  backdrop-filter: blur(5px); /* Efecto "cristal" */
+
+  list-style: none;
+  padding: 2rem 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  /* Animación de entrada: desliza desde arriba */
+  transform: translateY(-100%);
+  animation: slideDown 0.4s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Los links dentro del menú móvil */
+.navLinksMobile a {
+  color: var(--color-white);
+  font-size: 1.2rem;
+  text-decoration: none;
+  opacity: 0; /* Empiezan invisibles para un efecto de aparición en cascada */
+  animation: fadeInLink 0.5s 0.2s ease-out forwards;
+}
+
+/* Le damos un retraso diferente a cada link para el efecto cascada */
+.navLinksMobile li:nth-child(2) a { animation-delay: 0.3s; }
+.navLinksMobile li:nth-child(3) a { animation-delay: 0.4s; }
+
+
+@keyframes fadeInLink {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/*
+=====================================================
+  MEDIA QUERY: La Magia del Responsive
+  Para pantallas MÁS ANCHAS de 768px (tablets y escritorio)
+=====================================================
+*/
+@media (min-width: 768px) {
+  /* Mostramos los links de escritorio */
+  .navLinksDesktop {
+    display: flex !important; 
+  }
+
+  /* Ocultamos el icono de hamburguesa */
+  .hamburger {
+    display: none !important; 
+  }
+  
+  /* Nos aseguramos que el menú desplegable móvil nunca se vea en escritorio */
+  .navLinksMobile {
+    display: none;
+  }
 }
 
 .navLinksDesktop a, .navLinksMobile a {
@@ -106,6 +214,10 @@
     filter: brightness(1.2);
 }
 
+.navbarWrapper {
+    position: relative; /* ¡EL ANCLA! El menú móvil ahora se posicionará respecto a esto */
+}
+
 .logo {
   height: 140px;
   image-rendering: pixelated;
@@ -124,29 +236,7 @@
 }
 
 
-.navLinksDesktop { 
-  list-style: none;
-  display: flex;
-  justify-content: center; 
-  gap: 2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  font-size: 50px;
-}
 
-.navLinksDesktop a {
-  color: var(--color-red);
-  text-decoration: none;
-  font-size: 0.8rem;
-  transition: color 0.2s ease-in-out;
-}
-
-.navLinksDesktop a:hover,
-.navLinksDesktop a.active {
-  color: var(--color-red);
-}
 
 
 .cartIconContainer {
@@ -177,64 +267,7 @@
   display: block; 
 }
 
-.navLinksMobile {
-  list-style: none;
-  padding: 1rem 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  background-color: var(--color-dark-grey);
-  width: 100%;
-}
 
-.navLinksMobile a {
-  color: var(--color-white);
-  text-decoration: none;
-  font-size: 1rem;
-}
-.navLinksMobile a.active {
-    color: var(--color-red);
-}
-
-.dropdownContainer {
-  position: relative;
-}
-
-.navLink {
-  color: var(--color-white);
-  text-decoration: none;
-  font-size: 0.8rem;
-  transition: color 0.2s ease-in-out;
-  padding: 1rem 0; 
-}
-
-.dropdownMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: var(--color-dark-grey);
-  border-top: 2px solid var(--color-red);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  min-width: 200px;
-  padding: 0.5rem 0;
-  animation: fadeIn 0.2s ease-out;
-}
-
-.dropdownMenu a {
-  color: var(--color-white);
-  text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.8rem;
-  transition: background-color 0.2s;
-}
-
-.dropdownMenu a:hover {
-  background-color: var(--color-white);
-}
 
 .muteButton {
   background: transparent;

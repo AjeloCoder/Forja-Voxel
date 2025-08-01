@@ -1,31 +1,40 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
 }
 
 main {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 150px; /* Un valor aproximado a la altura de tu footer */
 }
 
-
-.home-background {
-  /* ESTILOS POR DEFECTO (Móvil) */
-  background-image: url('/images/DarkSky.jpeg'); /* ¡La vertical! */
+.home-background-image {
+  position: fixed; /* Lo fijamos a la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Lo mandamos detrás de todo */
+  
+  /* Usamos la imagen correcta según el tamaño de la pantalla */
+  background-image: url('/images/DarkSky.jpeg'); /* Default (móvil) */
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #0c0d13;
-  transition: background-image 0.3s ease-in-out; /* Animación sutil al cambiar */
+  
+  /* ¡LA CLAVE! La posición en Y es al 75% desde arriba (enfoca la forja) */
+  background-position: 55%;
+  
+  /* Suaviza la transición */
+  transition: all 0.3s ease;
 }
 
-/* MEDIA QUERY: Para pantallas más anchas que 768px */
 @media (min-width: 900px) {
-  .home-background {
-    /* ESTILOS PARA ESCRITORIO */
-    background-image: url('/images/DarkSky2.jpeg'); /* ¡La panorámica! */
+  .home-background-image {
+    background-image: url('/images/DarkSky2.jpeg');
+    /* ¡LA CLAVE! En escritorio, queremos más zoom, movemos el foco más arriba */
+    background-size: 100%; /* Prueba 120%, 150%, 180%... */
+    background-position: center 70%; /* Y reajustamos la posición vertical */
   }
 }
+
+
+

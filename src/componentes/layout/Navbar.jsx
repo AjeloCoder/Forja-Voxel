@@ -1,34 +1,30 @@
-import { useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+
+import { Link, NavLink, } from 'react-router-dom';
 import { useCart } from "../../context/UseCart"; // Corregí la ruta a 'useCart'
 import { useSettings } from '../../context/SettingsContext';
 import { FaVolumeUp, FaVolumeMute, FaBars, FaTimes, FaShoppingCart } from 'react-icons/fa';
 import logoIcon from '../../assets/imagenes/logo-icon.png';
 import styles from './Navbar.module.css';
 
-// Array "hardcodeado" con las categorías de tus productos
-const categories = ['accesorios', 'gaming', 'decoracion', 'figuras'];
 
-function Navbar() {
-  const { isPlaying, toggleMusic } = useSettings();
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+function Navbar({ 
+  isHomePage, 
+  isMobileMenuOpen, 
+  toggleMobileMenu, 
+  isDropdownOpen, 
+  setIsDropdownOpen, 
+  closeAllMenus
+}) {
   const { items } = useCart();
-  
   const totalItemsInCart = items.reduce((sum, item) => sum + item.quantity, 0);
 
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const closeMenus = () => {
-    setIsMobileMenuOpen(false);
-    setIsDropdownOpen(false);
-  };
   
+   const closeMenus = closeAllMenus;
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
   return (
-    <nav className={isHomePage ? styles.navbarTransparent : styles.navbarSolid}>
+     <nav className={`${styles.navbarWrapper} ${isHomePage ? styles.navbarTransparent : styles.navbarSolid}`}>
       <div className={styles.navContainer}>
         <Link to="/" className={styles.logoLink} onClick={closeMenus}>
           <img src={logoIcon} alt="Icono de Forja Vóxel" className={styles.logo} />
@@ -44,7 +40,7 @@ function Navbar() {
             <NavLink
               to="/productos"
               className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink}
-              onClick={() => setIsDropdownOpen(false)}
+              onClick={closeMenus} 
             >
               Productos
             </NavLink>
@@ -66,8 +62,8 @@ function Navbar() {
               
             )}
           </li>
-          <li><NavLink to="/nosotros" className={({ isActive }) => isActive ? styles.active : ''}>Nosotros</NavLink></li>
-          <li><NavLink to="/contacto" className={({ isActive }) => isActive ? styles.active : ''}>Contacto</NavLink></li>
+          <li><NavLink to="/nosotros" onClick={closeMenus} className={({ isActive }) => isActive ? styles.active : ''}>El Taller</NavLink></li>
+          <li><NavLink to="/contacto" onClick={closeMenus} className={({ isActive }) => isActive ? styles.active : ''}>Encargos Especiales</NavLink></li>
         </ul>
 
         {/* --- Iconos a la derecha --- */}

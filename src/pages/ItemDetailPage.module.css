@@ -72,4 +72,17 @@
     /* Alinear los items en el eje vertical */
     align-items: center; 
   }
+  .title {
+    font-size: 3rem; /* Reducimos el tamaño del título */
+    text-shadow: 3px 3px 0px var(--color-red); /* Sombra más sutil */
+  }
+
+  .ctaButton {
+    font-size: 1rem; /* Botón más pequeño */
+    padding: 12px 28px;
+    margin-top: 1.5rem; /* Menos espacio */
+  }
+   .heroContainer {
+    padding-top: 15vh; /* Ajusta el padding para que el título no quede tan alto */
+  }
 }

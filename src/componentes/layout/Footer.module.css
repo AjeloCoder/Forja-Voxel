@@ -23,7 +23,9 @@
 
   /* El resto de estilos para alinear los hijos internos */
   display: flex;
-  justify-content: space-between;
+  flex-wrap: nowrap; /* Permite que los elementos se pongan en varias líneas si no caben */
+  justify-content: space-between; /* Centra todo en móvil */
+  gap: 1rem;
   align-items: flex-end;
   padding: 1rem 2rem;
   box-sizing: border-box;
@@ -59,7 +61,15 @@
     transform: translate(-50%, 0);
   }
 }
+
+.logoContainer {
+  position: relative; /* ¡Sigue siendo nuestra ancla! */
+  display: flex;
+  align-items: center; /* Alinea el logo y los iconos verticalmente */
+}
+
 .personalLogo {
+  order: 1;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -68,7 +78,7 @@
   height: 100px;
   animation: pulseGlow 3s infinite ease-in-out;
   position: relative; 
-  z-index: 100;
+  z-index: 10;
 }
 
 .personalLogo img {
@@ -87,6 +97,7 @@
   background: none;
   border: none;
   display: flex;
+  margin-left: 1rem;
   flex-direction: column; /* Apila los iconos verticalmente */
   align-items: center; /* Centra los iconos si tuvieran anchos diferentes */
   gap: 1.5rem; /* Espacio entre los iconos */
@@ -133,7 +144,42 @@
 
 
 @media (max-width: 768px) {
+  
   .footerContent {
     flex-direction: column;
   }
+  .socialMenu a{
+    color: var(--color-white);
+  }
+
+  .socialMenu{
+  display: flex;
+  gap: 1.5rem; /* Espacio entre iconos */
+  
+  /* Lo posicionamos A LA DERECHA del logo */
+  position: absolute;
+  left: 170px; /* Juega con este valor para la distancia del logo */
+  bottom: 5px; /* Juega con este valor para la alineación vertical */
+  flex-direction: row;
+ 
+  /* Mantenemos los estilos de transparencia y animación */
+  background: none;
+  border: none;
+  }
+
+}
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
