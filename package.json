@@ -3,12 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+
+  "homepage": "https://AjeloCoder.github.io/Forja-Voxel",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npx gh-pages -d dist  -b gh-pages -r production https://github.com/AjeloCoder/Forja-Voxel.git" 
+    "deploy": "npx gh-pages -d dist" 
   },
   "dependencies": {
     "firebase": "^11.10.0",
