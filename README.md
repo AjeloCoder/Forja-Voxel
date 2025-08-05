@@ -1,4 +1,4 @@
-# Forja Vóxel 🏪🔥
+# Forja Vóxel DESARROLLO 🏪🔥
 
 ¡Bienvenido a Forja Vóxel! Un e-commerce especializado en impresiones 3D con una apasionada temática de pixel art y estética retro. Este proyecto fue desarrollado como parte de mi formación en programación, combinando tecnologías modernas de frontend con una base de datos en la nube.
 
