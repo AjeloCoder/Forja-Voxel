@@ -9,6 +9,7 @@ import CartPage from './pages/CartPage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { useSettings } from './context/SettingsContext';
+import ElTaller from './pages/ElTaller';
 import './App.css';
 
 // Componente intermediario para poder usar hooks de routing y contexto
@@ -61,8 +62,7 @@ function AppContent() {
           <Route path="/productos" element={<ProductsPage />} />
           <Route path="/category/:categoryId" element={<ProductsPage />} />
            <Route path="/item/:itemId" element={<ItemDetailPage />} />
-          <Route path="/nosotros" element={<div><h1>El Taller</h1></div>} />
-          <Route path="/contacto" element={<div><h1>Encargos Especiales</h1></div>} />
+          <Route path="/taller" element={<ElTaller />} />
           <Route path="/carrito" element={<CartPage />} />
            <Route path="*" element={<NotFoundPage />} />
         </Routes>
