@@ -96,6 +96,7 @@
 .dropdownMenu{
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(5px);
 }
 
 @keyframes slideDown {
