@@ -63,6 +63,7 @@ function AppContent() {
           <Route path="/category/:categoryId" element={<ProductsPage />} />
            <Route path="/item/:itemId" element={<ItemDetailPage />} />
           <Route path="/taller" element={<ElTaller />} />
+          <Route path="/contacto" element={<div><h1>Encargos Especiales</h1> </div>} /> 
           <Route path="/carrito" element={<CartPage />} />
            <Route path="*" element={<NotFoundPage />} />
         </Routes>

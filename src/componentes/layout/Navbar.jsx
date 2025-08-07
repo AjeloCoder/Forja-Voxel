@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react'; // Necesitamos esto de vuelta
-import { Link, NavLink, } from 'react-router-dom';
+
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from "../../context/UseCart"; // Corregí la ruta a 'useCart'
 import { useSettings } from '../../context/SettingsContext';
 import { FaVolumeUp, FaVolumeMute, FaBars, FaTimes, FaShoppingCart } from 'react-icons/fa';
@@ -16,36 +16,20 @@ function Navbar({
   setIsDropdownOpen, 
   closeAllMenus
 }) {
-  const logoRef = useRef(null);
-
-  // Mantenemos el useEffect para el brillo que sigue al cursor
-  useEffect(() => {
-    if (!isHomePage || !logoRef.current) return;
-    const logo = logoRef.current;
-    const handleMouseMove = (e) => {
-      const rect = logo.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      logo.style.setProperty('--mouse-x', `${x}px`);
-      logo.style.setProperty('--mouse-y', `${y}px`);
-    };
-    logo.addEventListener('mousemove', handleMouseMove);
-    return () => logo.removeEventListener('mousemove', handleMouseMove);
-  }, [isHomePage]);
+  const location = useLocation();
   const { items } = useCart();
   const totalItemsInCart = items.reduce((sum, item) => sum + item.quantity, 0);
-
+  const isTallerPage = location.pathname === '/taller'; 
+  const navClass = (isHomePage || isTallerPage) ? styles.navbarTransparent : styles.navbarSolid;
   const { isPlaying, toggleMusic } = useSettings(); 
   
    const closeMenus = closeAllMenus;
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
   return (
-     <nav className={`${styles.navbarWrapper} ${isHomePage ? styles.navbarTransparent : styles.navbarSolid}`}>
+     <nav className={`${styles.navbarWrapper} ${navClass}`}>
       <div className={styles.navContainer}>
-        <Link to="/" className={styles.logoLink} onClick={closeMenus} ref={logoRef}>
-        <div className={styles.glassOverlay}></div> {/* Div para el overlay */}
-            <div className={styles.pixelShine}></div> {/* Div para el destello */}
+        <Link to="/" className={styles.logoLink} onClick={closeMenus}>
           <img src={logoIcon} alt="Icono de Forja Vóxel" className={styles.logo} />
         </Link>
         
@@ -81,17 +65,17 @@ function Navbar({
               
             )}
           </li>
-          <li><NavLink to="/nosotros" onClick={closeMenus} className={({ isActive }) => isActive ? styles.active : ''}>El Taller</NavLink></li>
+          <li><NavLink to="/taller" onClick={closeMenus} className={({ isActive }) => isActive ? styles.active : ''}>El Taller</NavLink></li>
           <li><NavLink to="/contacto" onClick={closeMenus} className={({ isActive }) => isActive ? styles.active : ''}>Encargos Especiales</NavLink></li>
         </ul>
 
         {/* --- Iconos a la derecha --- */}
         <div className={styles.rightIconsWrapper}>
-            {isHomePage && (
-              <button onClick={toggleMusic} className={styles.muteButton}>
-                {isPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
-              </button>
-            )}
+               {(isHomePage || isTallerPage) && (
+            <button onClick={toggleMusic} className={styles.muteButton}>
+              {isPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
+            </button>
+          )}
             <Link to="/carrito" className={styles.cartIconContainer}>
               <FaShoppingCart />
               {totalItemsInCart > 0 && (

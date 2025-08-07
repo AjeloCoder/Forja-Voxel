@@ -24,6 +24,14 @@
   background-position: center;
 }
 
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
 /* Para que el contenido esté por encima de la imagen de fondo */
 .content {
   position: relative;
@@ -34,15 +42,31 @@
   border-radius: 10px;
 }
 
-.title {
+
+.title { /* "El Taller" */
   font-size: 5rem;
+  /* Múltiples sombras crean un borde grueso */
+  text-shadow: 
+    -4px -4px 0 var(--color-dark-grey),  
+     4px -4px 0 var(--color-dark-grey),
+    -4px  4px 0 var(--color-dark-grey),
+     4px  4px 0 var(--color-dark-grey);
 }
 
-.sectionTitle {
+.sectionTitle { /* "El Herrero", "El Arsenal", etc. */
   font-size: 3rem;
   color: var(--color-red);
+  /* Mismo efecto de borde, pero blanco para contrastar con el rojo */
+  text-shadow:
+    -3px -3px 0 var(--color-white),  
+     3px -3px 0 var(--color-white),
+    -3px  3px 0 var(--color-white),
+     3px  3px 0 var(--color-white);
 }
 
+.section:nth-of-type(3) .backgroundImage::after { /* nth-of-type(3) selecciona la tercera sección */
+  background-color: rgba(0, 0, 0, 0.6); /* Más oscuro para que el texto rojo se lea mejor */
+}
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr; /* Una columna para móvil */

@@ -34,7 +34,7 @@ function ElTaller() {
           <div className={styles.rightColumn}>
             <h2 className={styles.sectionTitle}>El Herrero</h2>
             <p>
-              ¡Hola! Soy Alejo, el artesano detrás de la forja. De día, me encontrarás sirviendo café y, de noche, forjando mundos con líneas de código. Forja Vóxel es donde mis dos pasiones colisionan: un lugar para convertir píxeles en realidad.
+              ¡Hola! Soy Alejo, el artesano detrás de Forja Vóxel. Acá es donde mis pasiones colisionan: Programar, crear y compartir. Un lugar para convertir píxeles en realidad. Mi misión es acompañarte para transformar tus ideas y algo tangible, ya sea de utilidad o decorativo.
             </p>
           </div>
         </div>
