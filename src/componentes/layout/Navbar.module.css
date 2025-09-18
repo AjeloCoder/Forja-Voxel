@@ -215,9 +215,6 @@
     filter: brightness(1.2);
 }
 
-.navbarWrapper {
-    position: relative; /* ¡EL ANCLA! El menú móvil ahora se posicionará respecto a esto */
-}
 
 .logo {
   height: 140px;

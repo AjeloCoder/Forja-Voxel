@@ -92,7 +92,7 @@ function Navbar({
         <ul className={styles.navLinksMobile}>
           {/* Aquí podrías replicar la lógica del dropdown si quisieras en el futuro */}
           <li onClick={toggleMobileMenu}><NavLink to="/productos">Productos</NavLink></li>
-          <li onClick={toggleMobileMenu}><NavLink to="/nosotros">El Taller</NavLink></li>
+          <li onClick={toggleMobileMenu}><NavLink to="/taller">El Taller</NavLink></li>
           <li onClick={toggleMobileMenu}><NavLink to="/contacto">Encargos Especiales</NavLink></li>
         </ul>
       )}

@@ -3,15 +3,62 @@
   background-color: #0c0d13; /* Un negro azulado como base */
   color: var(--color-white);
 }
+.homeIconLink {
+  /* ¡LA MAGIA! Lo sacamos del flujo y lo fijamos a la ventana */
+  position: fixed;
+  
+  /* Posición en la esquina superior izquierda */
+  top: 25px; /* Margen desde arriba */
+  left: 30px;  /* Margen desde la izquierda */
+  
+  z-index: 1000; /* ¡MUY IMPORTANTE! Un valor alto para que esté por encima de todo */
+
+  width: 150px; /* Un tamaño visible pero no intrusivo */
+  height: 150 px;
+
+  /* Animación sutil para la aparición y transiciones */
+  opacity: 0;
+  animation: fadeInIcon 1s 0.5s ease-out forwards;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Le damos un efecto de 'hover' para que se sienta interactivo */
+.homeIconLink:hover {
+  transform: scale(1.1);
+}
+
+.homeIconLink img {
+  width: 150px;
+  height: auto;
+  display: block;
+}
+
+/* La animación para que aparezca suavemente cuando carga la página */
+@keyframes fadeInIcon {
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* --- Pequeño ajuste para móvil --- */
+@media (max-width: 768px) {
+  .homeIconLink {
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+  }
+}
 
 .section {
   min-height: 100vh;
-  position: relative; /* Contexto para posicionar fondos y contenido */
+  position: relative; /* ¡CLAVE! Padre para el div de fondo */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  box-sizing: border-box;
+  overflow: hidden; /* Oculta cualquier desborde de la imagen */
+  /* ... tus otros estilos de padding ... */
 }
 
 .backgroundImage {
@@ -20,8 +67,19 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
+  
+  /* El combo mágico para fondos que no deben deformarse */
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+  /* Puedes tener una posición por defecto, pero la anularemos */
+  background-position: center; 
+  
+  z-index: 1; /* Detrás del contenido */
+  position: absolute;
+  /* Un filtro sutil para que no "vibre" tanto la imagen */
+  filter: brightness(0.9);
+  
 }
 
   &::after {
@@ -29,7 +87,7 @@
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+   
   }
 
 /* Para que el contenido esté por encima de la imagen de fondo */
@@ -44,7 +102,8 @@
 
 
 .title { /* "El Taller" */
-  font-size: 5rem;
+  min-height: 1.2em;
+   font-size: clamp(3rem, 10vw, 5rem);
   /* Múltiples sombras crean un borde grueso */
   text-shadow: 
     -4px -4px 0 var(--color-dark-grey),  
@@ -53,8 +112,18 @@
      4px  4px 0 var(--color-dark-grey);
 }
 
+.typingCursor::after {
+  content: '_'; /* O un bloque: '█' */
+  display: inline-block;
+  animation: blinkCursor 0.7s infinite step-end;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 .sectionTitle { /* "El Herrero", "El Arsenal", etc. */
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   color: var(--color-red);
   /* Mismo efecto de borde, pero blanco para contrastar con el rojo */
   text-shadow:
@@ -62,34 +131,275 @@
      3px -3px 0 var(--color-white),
     -3px  3px 0 var(--color-white),
      3px  3px 0 var(--color-white);
+     text-align: center;
 }
 
 .section:nth-of-type(3) .backgroundImage::after { /* nth-of-type(3) selecciona la tercera sección */
   background-color: rgba(0, 0, 0, 0.6); /* Más oscuro para que el texto rojo se lea mejor */
 }
+
 .gridContainer {
   display: grid;
-  grid-template-columns: 1fr; /* Una columna para móvil */
+  /* En móvil, una sola columna */
+  grid-template-columns: 1fr;
   gap: 2rem;
   align-items: center;
-  max-width: 1000px;
-  position: relative;
-  z-index: 2;
+  width: 100%;
 }
 
-@media (min-width: 768px) {
+.content, .gridContainer {
+  position: relative;
+  z-index: 2; /* Siempre encima del fondo */
+}
+
+@media (min-width: 900px) { /* El quiebre para escritorio */
   .gridContainer {
-    grid-template-columns: 1fr 1fr; /* Dos columnas para escritorio */
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .section {
+    padding: 2rem;
+    background-color: #0c0d13; /* O el color negro azulado que elegimos */
   }
 }
 
 .avatarImage {
-  width: 100%;
-  border-radius: 10px; /* Bordes redondeados para la imagen */
-  border: 4px solid var(--color-dark-grey);
+  width: 80%; /* No ocupará todo el ancho en móvil, se ve mejor */
+  margin: 0 auto; /* La centramos */
+  display: block; /* Para que el margin:auto funcione */
 }
 
 .rightColumn p {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
   line-height: 1.8;
+  padding: 1.5rem;
+}
+
+.formContainer {
+  border: 4px solid var(--color-red);
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px; /* Evita que sea demasiado ancho en escritorio */
+  
+  /* Centra el título y el párrafo introductorio */
+  text-align: center;
+   /* Le damos un fondo y borde para que parezca una 'ventana' o 'panel' */
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 8px; /* Un toque suave */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el formulario y el botón horizontalmente */
+}
+
+/* El título principal de la sección, ahora con más poder */
+.formTitle {
+  font-size: clamp(2rem, 8vw, 4rem); /* Más grande y responsive */
+  color: var(--color-white);
+  text-shadow: 4px 4px 0px var(--color-red); /* Sombra más potente */
+  margin-bottom: 1.5rem;
+}
+
+.textIntro{
+  line-height: 1.5rem;
+}
+.sectionEncargos {
+  /* En móvil, queremos un padding que le de aire al formulario */
+  padding: 4rem 1rem;
+}
+
+.encargosWrapper {
+  /* Este wrapper centrará el contenido */
+  width: 100%;
+  max-width: 500px; /* Un buen ancho para formularios en móvil */
+  margin: 0 auto;
+}
+
+/* El formulario en sí */
+.contactForm {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Espacio entre cada elemento del formulario */
+  width: 100%;
+}
+
+.contactForm label {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Espacio entre el checkbox y el texto */
+  justify-content: center; /* ¡Centramos los checkboxes! */
+}
+
+/* Estilo para los checkboxes, ¡esto es `PixelForja`! */
+.contactForm input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--color-dark-grey);
+  border: 2px solid var(--color-white);
+  cursor: pointer;
+  position: relative;
+}
+
+.contactForm input[type="checkbox"]:checked {
+  background-color: var(--color-red);
+}
+
+.checkboxGroup {
+  border: 2px solid var(--color-white);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkboxGroup legend {
+  padding: 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.contactForm label {
+  font-size: 1.2rem;
+   text-align: left;
+   line-height: 1.5;
+}
+
+/* --- ESTILOS PARA EL TEXTAREA --- */
+.textareaLabel {
+  margin-top: 1rem; /* Espacio extra arriba */
+  text-align: center;
+}
+
+.fileInputHidden {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+/* El falso botón (nuestro label estilizado) */
+.fileInputLabel {
+  /* ¡Reutilizamos los estilos de nuestro botón! */
+  background-color: var(--color-dark-grey);
+  color: var(--color-white);
+  border: 3px solid var(--color-white);
+  padding: 10px 15px;
+  font-family: var(--font-pixel);
+  cursor: pointer;
+  box-shadow: 4px 4px 0px var(--color-dark-grey);
+  transition: all 0.1s ease-in-out;
+
+  text-align: center;
+  font-size: 1rem; /* Ajustamos el tamaño de fuente */
+}
+
+/* Y le damos el mismo hover y active que a los otros botones */
+.fileInputLabel:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--color-dark-grey);
+}
+
+.fileInputLabel:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.fileNameDisplay {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #ccc; /* Un color sutil */
+  margin-top: -1rem; /* Un poco de margen negativo para acercarlo al botón */
+  font-style: italic;
+}
+
+.contactForm textarea {
+  background-color: var(--color-dark-grey);
+  border: 2px solid var(--color-white);
+  color: var(--color-white);
+  padding: 1rem;
+  font-family: var(--font-pixel);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical; /* Permite al usuario ajustar la altura, pero no el ancho */
+}
+.contactLabel {
+    text-align: center;
+    margin-top: 1rem;
+}
+.textInput {
+  background-color: var(--color-dark-grey);
+  border: 2px solid var(--color-white);
+  color: var(--color-white);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-pixel);
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.textInput,
+textarea {
+  /* Estilos para que los inputs se vean bien */
+  background-color: var(--color-dark-grey);
+  border: 2px solid var(--color-white);
+  color: var(--color-white);
+  padding: 0.8rem;
+  font-family: var(--font-pixel);
+  font-size: 0.9rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.disclaimer {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 2px dashed var(--color-red);
+  background-color: rgba(44, 44, 44, 0.5);
+   line-height: 1.5; 
+}
+
+.disclaimer p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #ddd; /* Un blanco un poco más apagado */
+  text-align: center;
+}
+
+.disclaimer p strong {
+    color: var(--color-red); /* La palabra "Importante" en rojo */
+}
+
+@media (min-width: 1024px) {
+  .encargosWrapper {
+    max-width: 1100px; /* Un ancho mayor para escritorio */
+
+    /* ¡AQUÍ ESTÁ LA MAGIA DEL GRID! */
+    display: grid;
+    /* Dos columnas: la del formulario ocupa el doble que la del disclaimer */
+    grid-template-columns: 2fr 1fr;
+    align-items: center; /* Centra verticalmente */
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 899px) { /* Móvil (pantallas más estrechas que 900px) */
+  /* Ordenamos a la imagen del TALLER (la primera sección) que se ancle ABAJO */
+  .section:nth-of-type(1) .backgroundImage {
+    background-position: center bottom;
+  }
+}
+
+@media (min-width: 900px) { /* Escritorio */
+  /* Ordenamos a la imagen del ARSENAL (la tercera sección) que se ancle al 40% de la altura */
+  .section:nth-of-type(3) .backgroundImage {
+    background-position: center 40%;
+  }
 }
