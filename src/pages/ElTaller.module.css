@@ -101,27 +101,50 @@
 }
 
 
-.title { /* "El Taller" */
-  min-height: 1.2em;
-   font-size: clamp(3rem, 10vw, 5rem);
-  /* Múltiples sombras crean un borde grueso */
-  text-shadow: 
-    -4px -4px 0 var(--color-dark-grey),  
-     4px -4px 0 var(--color-dark-grey),
-    -4px  4px 0 var(--color-dark-grey),
-     4px  4px 0 var(--color-dark-grey);
+.title {
+  /* ¡CLAVE 1! Le damos un color de texto explícito y diferente al borde */
+  color: var(--color-white); 
+
+  /* ¡CLAVE 2! Usamos un color de sombra que contraste mucho mejor: EL ROJO! */
+  text-shadow:
+    -4px -4px 0 var(--color-red),  
+     4px -4px 0 var(--color-red),
+    -4px  4px 0 var(--color-red),
+     4px  4px 0 var(--color-red);
+  
+  font-size: 5rem;
 }
 
-.typingCursor::after {
-  content: '_'; /* O un bloque: '█' */
+
+.typewriter {
+  /* Hacemos que sea un bloque en línea para que se ajuste a su propio contenido */
   display: inline-block;
-  animation: blinkCursor 0.7s infinite step-end;
+
+  /* La animación de tipeo y parpadeo */
+  border-right: 0.15em solid var(--color-red); /* El cursor */
+  white-space: nowrap; /* Fuerza al texto a una línea */
+  overflow: hidden;   /* Oculta las letras que aún no aparecen */
+  
+  animation: 
+    typing 2s steps(9, end) forwards, /* Eliminamos el delay inicial para probar */
+    blinkCursor 0.75s step-end infinite;
 }
 
-@keyframes blinkCursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+/* El Keyframe ahora anima el ancho basado en el tamaño intrínseco del texto */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% } /* El 100% de un inline-block es su propio contenido */
 }
+
+
+/* El parpadeo del cursor se mantiene igual */
+@keyframes blinkCursor {
+  from, to { border-color: transparent }
+  50% { border-color: var(--color-red); }
+}
+
+
 .sectionTitle { /* "El Herrero", "El Arsenal", etc. */
   font-size: clamp(2rem, 8vw, 3rem);
   color: var(--color-red);
@@ -147,6 +170,59 @@
   width: 100%;
 }
 
+.sectionHerrero {
+  /* Le damos más altura para que el efecto "sticky" tenga recorrido */
+  min-height: 150vh;
+}
+
+@media (min-width: 900px) {
+  .gridContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  
+  /* ¡LA MAGIA DEL STICKY! */
+  .leftColumn {
+    position: sticky; /* Se quedará pegado */
+    top: 50%; /* Cuando su parte superior llegue al 50% de la ventana */
+    transform: translateY(-50%); /* Lo centramos verticalmente */
+  }
+}
+
+.rightColumn p {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.8;
+    padding: 1.5rem;
+    color: #FFF; /* Le damos un color blanco para que sea visible */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}.sectionHerrero {
+  /* Le damos más altura para que el efecto "sticky" tenga recorrido */
+  min-height: 150vh;
+}
+
+@media (min-width: 900px) {
+  .gridContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  
+  /* ¡LA MAGIA DEL STICKY! */
+  .leftColumn {
+    position: sticky; /* Se quedará pegado */
+    top: 50%; /* Cuando su parte superior llegue al 50% de la ventana */
+    transform: translateY(-50%); /* Lo centramos verticalmente */
+  }
+}
+
+.rightColumn p {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.8;
+    padding: 1.5rem;
+    color: #FFF; /* Le damos un color blanco para que sea visible */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
 .content, .gridContainer {
   position: relative;
   z-index: 2; /* Siempre encima del fondo */

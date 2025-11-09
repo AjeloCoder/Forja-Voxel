@@ -11,34 +11,7 @@ import logoIcon from '../assets/imagenes/logo-icon.png';
 const BASE_PATH = import.meta.env.BASE_URL;
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-function ElTaller() {
-  const mainRef = useRef(null); // Ref para el contenedor principal de la página
-
-  useEffect(() => {
-    // Usamos gsap.context para un manejo seguro de las animaciones en React
-    const ctx = gsap.context(() => {
-
-      // --- ANIMACIÓN 1: MÁQUINA DE ESCRIBIR PARA EL TÍTULO ---
-      gsap.to(`.${styles.title}`, { // Apuntamos al h1 con la clase .title
-        duration: 1.5, // Cuánto tarda en escribir el texto completo
-        text: "El Taller", // El texto que queremos que escriba
-        ease: "none",
-        
-        // El disparador: la animación solo empieza cuando la sección entra en la vista
-        scrollTrigger: {
-          trigger: `.${styles.sectionIntro}`, // La primera sección
-          start: "top 70%", // Empieza cuando la parte superior de la sección está al 70% de la ventana
-          toggleActions: "play none none none" // La animación solo se ejecuta una vez
-        }
-      });
-      
-      // ... Aquí pondremos las demás animaciones ...
-
-    }, mainRef); // Esto asegura que las animaciones solo afecten a elementos dentro de este componente
-
-    // Limpieza: importante para que las animaciones se eliminen si sales de la página
-    return () => ctx.revert();
-  }, []); // El array vacío [] significa que este efecto se ejecuta solo una vez, al montar el componente
+function ElTaller() {   
 
     const [fileName, setFileName] = useState("Ningún archivo seleccionado");
 
@@ -55,6 +28,57 @@ function ElTaller() {
     colores: [],
     // ... otros campos
   });
+   const mainRef = useRef(null);
+   useEffect(() => {
+    // 1. Usamos el selector 'q' que viene con el contexto. Es como un querySelector pero para el scope.
+    const ctx = gsap.context((self) => {
+      const q = self.selector;
+
+      // --- ANIMACIÓN 1: Título "El Taller" ---
+      gsap.to(q(`.${styles.title}`), { // Usamos q(...)
+        text: "El Taller",
+        duration: 1.5,
+        ease: "none",
+        color: "var(--color-white)",
+        scrollTrigger: {
+          trigger: q(`.${styles.sectionIntro}`),
+          start: "top 70%",
+          toggleActions: "play none none none"
+        }
+      });
+      
+      // --- ANIMACIÓN 2: Sección "El Herrero" ---
+      const herreroTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: q(`.${styles.sectionHerrero}`),
+          start: "top 70%", // Un poco más abajo para que se vea mejor en móvil
+          toggleActions: "play pause resume reset"
+        }
+      });
+      
+      // La timeline ahora usa q(...)
+      herreroTimeline
+        .from(q(`.${styles.avatarImage}`), { 
+          xPercent: -100, 
+          opacity: 0, 
+          duration: 0.8,
+          ease: 'power2.out'
+        })
+        .from(q(`.${styles.rightColumn}`), { 
+          xPercent: 100, 
+          opacity: 0, 
+          duration: 0.8,
+          ease: 'power2.out'
+        }, '<')
+        .to(q(`.${styles.bioText}`), { // También usa q(...)
+          // Quitamos la animación de texto para depurar primero la entrada. La volveremos a poner.
+          duration: 0.5,
+          opacity: 1 // Por ahora, solo la hacemos aparecer
+        });
+
+    }, mainRef);
+    return () => ctx.revert();
+  }, []);
   return (
     <div className={styles.mainContainer}>
       <Link to="/" className={styles.homeIconLink} aria-label="Volver a la página de inicio">
@@ -68,7 +92,7 @@ function ElTaller() {
         />
         <div className={styles.content}>
           {/* Dejamos el h1 vacío, GSAP lo rellenará */}
-          <h1 className={`${styles.title} ${styles.typingCursor}`}></h1> 
+            <h1 className={`${styles.title} ${styles.typewriter}`}>El Taller</h1>
         </div>
       </section>
 
@@ -84,7 +108,7 @@ function ElTaller() {
           </div>
           <div className={styles.rightColumn}>
             <h2 className={styles.sectionTitle}>El Herrero</h2>
-            <p>
+           <p className={styles.bioText}> 
               ¡Hola! Soy Alejo, el artesano detrás de Forja Vóxel. Acá es donde mis pasiones colisionan: Programar, crear y compartir. Un lugar para convertir píxeles en realidad. Mi misión es acompañarte para transformar tus ideas y algo tangible, ya sea de utilidad o decorativo.
             </p>
           </div>
