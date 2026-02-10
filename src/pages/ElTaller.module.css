@@ -51,6 +51,7 @@
      4px -4px 0 var(--color-dark-grey),
     -4px  4px 0 var(--color-dark-grey),
      4px  4px 0 var(--color-dark-grey);
+      min-height: 1.2em
 }
 
 .sectionTitle { /* "El Herrero", "El Arsenal", etc. */
