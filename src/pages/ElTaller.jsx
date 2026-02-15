@@ -182,7 +182,7 @@ function ElTaller() {
 
             <div className={styles.disclaimer}>
         <p>
-        <strong>¡Importante!</strong> Una vez enviado tu encargo, nos pondremos en contacto contigo para repasar todos los detalles (tamaño, colores, diseño final), darte el presupuesto y el tiempo estimado de forjado.
+        <strong>¡Importante!</strong> Una vez enviado tu encargo, nos contactaremos contigo para repasar todos los detalles (tamaño, colores, diseño final), darte el presupuesto y el tiempo estimado de forjado.
         </p>
           </div>
          
