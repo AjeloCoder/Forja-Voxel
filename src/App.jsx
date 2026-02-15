@@ -16,6 +16,7 @@ import './App.css';
 function AppContent() {
   const location = useLocation(); 
   const isHomePage = location.pathname === '/';
+  const isTallerPage = location.pathname === '/taller'; 
 
    const { isPlaying, toggleMusic } = useSettings();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -43,16 +44,15 @@ function AppContent() {
   return (
     <div className="app-container">
         {isHomePage && <div className="home-background-image" />}
-      <Toaster position="bottom-right" toastOptions={{ /* ...tus opciones... */ }} />
-        <Navbar 
-        isHomePage={isHomePage} 
+      <Toaster position="top-right" toastOptions={{ /* ...tus opciones... */ }} />
+        {!isTallerPage && <Navbar isHomePage={isHomePage} 
         isMobileMenuOpen={isMobileMenuOpen} 
         toggleMobileMenu={toggleMobileMenu}
         // Pasamos todo lo relacionado al dropdown
         isDropdownOpen={isDropdownOpen}
         setIsDropdownOpen={setIsDropdownOpen}
         closeAllMenus={closeAllMenus}
-      />
+      />}
       <main>
         <Routes>
           <Route 
@@ -68,7 +68,7 @@ function AppContent() {
            <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-      <Footer isHomePage={isHomePage} />
+       {!isTallerPage && <Footer isHomePage={isHomePage} />}
     </div>
   );
 }
