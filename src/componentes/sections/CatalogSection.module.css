@@ -1,0 +1,58 @@
+.catalogSection {
+  padding: 4rem 2rem;
+  background-color: var(--color-dark-grey); /* O el color que prefieras para esta sección */
+  color: var(--color-white);
+}
+
+.title {
+  text-align: center;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  color: var(--color-red);
+  margin-bottom: 0.5rem;
+  /* ... tu estilo de text-shadow ... */
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 1rem;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* Para que funcione bien en móvil */
+  margin-bottom: 3rem;
+}
+
+.filterContainer button {
+  /* Reutilizamos el estilo de 'pixel-button' pero lo adaptamos */
+  background-color: transparent;
+  color: var(--color-white);
+  border: 3px solid var(--color-dark-grey);
+  box-shadow: 4px 4px 0px var(--color-dark-grey);
+  padding: 10px 20px;
+  font-family: var(--font-pixel);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterContainer button:hover {
+  background-color: var(--color-dark-grey);
+  border-color: var(--color-white);
+}
+
+.filterContainer button.active {
+  /* El botón activo tiene el estilo principal */
+  background-color: var(--color-red);
+  border-color: var(--color-dark-grey);
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}

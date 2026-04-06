@@ -1,79 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import Navbar from './componentes/layout/Navbar';
-import Footer from './componentes/layout/Footer';
-import HomePage from './pages/HomePage';
-import ProductsPage from './pages/ProductsPage';
-import CartPage from './pages/CartPage';
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// ...otras importaciones...
+
+// Importa tus nuevas páginas y componentes
+import MainExperience from './pages/MainExperience'; // El nuevo nombre de HomePage
 import ItemDetailPage from './pages/ItemDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
-import { useSettings } from './context/SettingsContext';
-import ElTaller from './pages/ElTaller';
+
+// Importa los componentes de layout si los vamos a usar globalmente
+import Navbar from './componentes/layout/Navbar';
+import Footer from './componentes/layout/Footer';
+
 import './App.css';
 
-// Componente intermediario para poder usar hooks de routing y contexto
+// El componente que tiene acceso a la ubicación
 function AppContent() {
-  const location = useLocation(); 
-  const isHomePage = location.pathname === '/';
-  const isTallerPage = location.pathname === '/taller'; 
-
-   const { isPlaying, toggleMusic } = useSettings();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const closeAllMenus = () => {
-    setIsMobileMenuOpen(false);
-    setIsDropdownOpen(false);
-  };
-
-   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Si abrimos el menú hamburguesa, cerramos el de productos por si acaso
-    if (!isMobileMenuOpen) {
-      setIsDropdownOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!isHomePage && isPlaying) {
-      toggleMusic();
-    }
-  }, [isHomePage, isPlaying, toggleMusic ]);
-
   return (
     <div className="app-container">
-        {isHomePage && <div className="home-background-image" />}
-      <Toaster position="top-right" toastOptions={{ /* ...tus opciones... */ }} />
-        {!isTallerPage && <Navbar isHomePage={isHomePage} 
-        isMobileMenuOpen={isMobileMenuOpen} 
-        toggleMobileMenu={toggleMobileMenu}
-        // Pasamos todo lo relacionado al dropdown
-        isDropdownOpen={isDropdownOpen}
-        setIsDropdownOpen={setIsDropdownOpen}
-        closeAllMenus={closeAllMenus}
-      />}
+      {/* Navbar y Footer ahora son fijos y viven fuera de las secciones */}
+      <Navbar />
+
       <main>
+        {/* El router ahora solo se preocupa de unas pocas rutas */}
         <Routes>
-          <Route 
-            path="/" 
-            element={<HomePage isMobileMenuOpen={isMobileMenuOpen} />} 
-          />
-          <Route path="/productos" element={<ProductsPage />} />
-          <Route path="/category/:categoryId" element={<ProductsPage />} />
-           <Route path="/item/:itemId" element={<ItemDetailPage />} />
-          <Route path="/taller" element={<ElTaller />} />
-          <Route path="/contacto" element={<div><h1>Encargos Especiales</h1> </div>} /> 
-          <Route path="/carrito" element={<CartPage />} />
-           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/" element={<MainExperience />} />
+          <Route path="/item/:itemId" element={<ItemDetailPage />} />
+
+          {/* Dejamos el catch-all por si acaso */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-       {!isTallerPage && <Footer isHomePage={isHomePage} />}
+      
+      <Footer />
     </div>
   );
 }
 
-// El componente principal que solo se encarga del Router
 function App() {
   return (
     <Router basename="/Forja-Voxel">

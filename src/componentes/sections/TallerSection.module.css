@@ -52,7 +52,6 @@
 }
 
 .section {
-  min-height: 100vh;
   position: relative; /* ¡CLAVE! Padre para el div de fondo */
   display: flex;
   justify-content: center;
@@ -189,12 +188,6 @@
     gap: 3rem;
   }
   
-  /* ¡LA MAGIA DEL STICKY! */
-  .leftColumn {
-    position: sticky; /* Se quedará pegado */
-    top: 50%; /* Cuando su parte superior llegue al 50% de la ventana */
-    transform: translateY(-50%); /* Lo centramos verticalmente */
-  }
 }
 
 .rightColumn p {
@@ -215,12 +208,6 @@
     gap: 3rem;
   }
   
-  /* ¡LA MAGIA DEL STICKY! */
-  .leftColumn {
-    position: sticky; /* Se quedará pegado */
-    top: 50%; /* Cuando su parte superior llegue al 50% de la ventana */
-    transform: translateY(-50%); /* Lo centramos verticalmente */
-  }
 }
 
 .rightColumn p {
@@ -250,8 +237,8 @@
 
 .avatarImage {
   width: 80%; /* No ocupará todo el ancho en móvil, se ve mejor */
-  margin: 0 auto; /* La centramos */
-  display: block; /* Para que el margin:auto funcione */
+  margin: auto; /* La centramos */
+  display: flex; /* Para que el margin:auto funcione */
 }
 
 .rightColumn p {
