@@ -303,9 +303,92 @@
 }
 
 
+/* Auth Buttons Styles */
+.loginButton {
+  background-color: var(--color-primary, #4a90e2);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.loginButton:hover {
+  background-color: var(--color-primary-dark, #357abd);
+  transform: translateY(-2px);
+}
+
+.userMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--color-white, #fff);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+}
+
+.userButton:hover {
+  color: var(--color-primary, #4a90e2);
+}
+
+.userButton svg {
+  font-size: 1.2rem;
+}
+
+.userDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 150px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+  margin-top: 8px;
+}
+
+.userMenu:hover .userDropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: none;
+  color: #d32f2f;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.logoutBtn:hover {
+  background-color: #fee;
+}
+
 @media (min-width: 768px) {
   .navLinksDesktop {
-    display: flex; 
+    display: flex;
     justify-content: center;
     gap: 2rem;
     list-style: none;
@@ -313,7 +396,7 @@
     background-color: transparent;
   }
   .hamburger {
-    display: none; 
+    display: none;
   }
   .navLinksMobile {
     display: none;

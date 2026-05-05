@@ -1,30 +1,38 @@
 
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { useCart } from "../../context/UseCart"; // Corregí la ruta a 'useCart'
+import { useCart } from "../../context/UseCart";
 import { useSettings } from '../../context/SettingsContext';
-import { FaVolumeUp, FaVolumeMute, FaBars, FaTimes, FaShoppingCart } from 'react-icons/fa';
+import { useAuth } from '../../context/useAuth';
+import { FaVolumeUp, FaVolumeMute, FaBars, FaTimes, FaShoppingCart, FaUser } from 'react-icons/fa';
 import logoIcon from '../../assets/imagenes/logo-icon.png';
 import styles from './Navbar.module.css';
 
 const categories = ['accesorios', 'gaming', 'decoracion', 'figuras'];
 
-function Navbar({ 
-  isHomePage, 
-  isMobileMenuOpen, 
-  toggleMobileMenu, 
-  isDropdownOpen, 
-  setIsDropdownOpen, 
-  closeAllMenus
+function Navbar({
+  isHomePage,
+  isMobileMenuOpen,
+  toggleMobileMenu,
+  isDropdownOpen,
+  setIsDropdownOpen,
+  closeAllMenus,
+  onOpenAuthModal
 }) {
   const location = useLocation();
   const { items } = useCart();
+  const { isAuthenticated, userData, logout } = useAuth();
   const totalItemsInCart = items.reduce((sum, item) => sum + item.quantity, 0);
-  const isTallerPage = location.pathname === '/taller'; 
+  const isTallerPage = location.pathname === '/taller';
   const navClass = (isHomePage || isTallerPage) ? styles.navbarTransparent : styles.navbarSolid;
-  const { isPlaying, toggleMusic } = useSettings(); 
-  
-   const closeMenus = closeAllMenus;
+  const { isPlaying, toggleMusic } = useSettings();
+
+  const closeMenus = closeAllMenus;
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  const handleLogout = async () => {
+    await logout();
+    closeMenus();
+  };
 
   return (
      <nav className={`${styles.navbarWrapper} ${navClass}`}>
@@ -71,20 +79,40 @@ function Navbar({
 
         {/* --- Iconos a la derecha --- */}
         <div className={styles.rightIconsWrapper}>
-               {(isHomePage || isTallerPage) && (
+          {(isHomePage || isTallerPage) && (
             <button onClick={toggleMusic} className={styles.muteButton}>
               {isPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
             </button>
           )}
-            <Link to="/carrito" className={styles.cartIconContainer}>
-              <FaShoppingCart />
-              {totalItemsInCart > 0 && (
-                <span className={styles.cartBadge}>{totalItemsInCart}</span>
-              )}
-            </Link>
-            <div className={styles.hamburger} onClick={toggleMobileMenu}>
-              {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+          <Link to="/carrito" className={styles.cartIconContainer}>
+            <FaShoppingCart />
+            {totalItemsInCart > 0 && (
+              <span className={styles.cartBadge}>{totalItemsInCart}</span>
+            )}
+          </Link>
+
+          {isAuthenticated ? (
+            <div className={styles.userMenu}>
+              <button className={styles.userButton}>
+                <FaUser />
+                <span>{userData?.nombre || 'Usuario'}</span>
+              </button>
+              <div className={styles.userDropdown}>
+                <button onClick={handleLogout} className={styles.logoutBtn}>Cerrar Sesión</button>
+              </div>
             </div>
+          ) : (
+            <button
+              onClick={onOpenAuthModal}
+              className={styles.loginButton}
+            >
+              Inicia Sesión
+            </button>
+          )}
+
+          <div className={styles.hamburger} onClick={toggleMobileMenu}>
+            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </div>
         </div>
 
       {/* --- Menú Móvil --- */}
