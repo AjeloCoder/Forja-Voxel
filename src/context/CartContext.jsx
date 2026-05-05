@@ -46,6 +46,10 @@ export const cartReducer = (state, action) => {
       return { ...state, items: [] };
     }
 
+    case CART_ACTIONS.SYNC_CART: {
+      return { ...state, items: action.payload };
+    }
+
     default:
       throw new Error(`Acción desconocida en cartReducer: ${action.type}`);
   }

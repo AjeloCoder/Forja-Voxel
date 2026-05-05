@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/UseCart';
+import { useAuth } from '../context/useAuth';
 import { FaTrash } from 'react-icons/fa';
 import styles from './CartPage.module.css';
 import QuantitySelector from '../componentes/ui/QuantitySelector'
@@ -8,10 +9,10 @@ import { createOrder } from '../componentes/services/ProductService';
 import toast from 'react-hot-toast';
 
 function CartPage() {
-  const { items, removeItem, addItem, decreaseQuantity, clearCart } = useCart(); 
-  const navigate = useNavigate(); // 4. Inicializa el hook de navegación
-  
-  // 5. Un estado para gestionar la carga durante el checkout
+  const { items, removeItem, addItem, decreaseQuantity, clearCart } = useCart();
+  const { isAuthenticated, userData, user } = useAuth();
+  const navigate = useNavigate();
+
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   const handleRemove = (itemId, itemName) => {
@@ -24,13 +25,20 @@ function CartPage() {
 
 
    const handleCheckout = async () => {
-    setIsCheckingOut(true); // Muestra feedback de carga
+    setIsCheckingOut(true);
 
-    // Preparamos los datos del comprador (simulados por ahora)
+    // Check if user is authenticated
+    if (!isAuthenticated || !userData) {
+      toast.error('Debes iniciar sesión para completar la compra');
+      setIsCheckingOut(false);
+      return;
+    }
+
+    // Usar datos del usuario autenticado
     const buyerData = {
-      name: 'Alejo Coder',
-      phone: '123456789',
-      email: 'alejo@coder.com'
+      name: userData.nombre || user?.email?.split('@')[0] || 'Cliente',
+      email: user?.email || '',
+      address: userData.dirección || 'No especificada'
     };
 
     // Preparamos los items de la orden de forma simplificada
