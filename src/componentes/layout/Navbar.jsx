@@ -19,7 +19,11 @@ function Navbar({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
   const { items } = useCart();
-  const { isAuthenticated, userData, logout } = useAuth();
+  const authContext = useAuth();
+  const { isAuthenticated, userData, logout } = authContext;
+
+  // DEBUG
+  console.log('🔐 AUTH DEBUG:', { isAuthenticated, userData, authContext });
   const totalItemsInCart = items.reduce((sum, item) => sum + item.quantity, 0);
   const isTallerPage = location.pathname === '/taller';
   const navClass = (isHomePage || isTallerPage) ? styles.navbarTransparent : styles.navbarSolid;
@@ -93,24 +97,12 @@ function Navbar({
             )}
           </Link>
 
-          {isAuthenticated ? (
-            <div className={styles.userMenu}>
-              <button className={styles.userButton}>
-                <FaUser />
-                <span>{userData?.nombre || 'Usuario'}</span>
-              </button>
-              <div className={styles.userDropdown}>
-                <button onClick={handleLogout} className={styles.logoutBtn}>Cerrar Sesión</button>
-              </div>
-            </div>
-          ) : (
-            <button
-              onClick={onOpenAuthModal}
-              className={styles.loginButton}
-            >
-              Inicia Sesión
-            </button>
-          )}
+          <button
+            onClick={onOpenAuthModal}
+            className={styles.loginButton}
+          >
+            INICIA SESIÓN
+          </button>
 
           <div className={styles.hamburger} onClick={toggleMobileMenu}>
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
