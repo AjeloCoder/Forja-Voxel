@@ -1,5 +1,5 @@
 
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useState } from 'react-router-dom';
 import { useCart } from "../../context/UseCart";
 import { useSettings } from '../../context/SettingsContext';
 import { useAuth } from '../../context/useAuth';
@@ -13,11 +13,10 @@ function Navbar({
   isHomePage,
   isMobileMenuOpen,
   toggleMobileMenu,
-  isDropdownOpen,
-  setIsDropdownOpen,
   closeAllMenus,
   onOpenAuthModal
 }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
   const { items } = useCart();
   const { isAuthenticated, userData, logout } = useAuth();
@@ -26,7 +25,10 @@ function Navbar({
   const navClass = (isHomePage || isTallerPage) ? styles.navbarTransparent : styles.navbarSolid;
   const { isPlaying, toggleMusic } = useSettings();
 
-  const closeMenus = closeAllMenus;
+  const closeMenus = () => {
+    closeAllMenus();
+    setIsDropdownOpen(false);
+  };
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
   const handleLogout = async () => {
