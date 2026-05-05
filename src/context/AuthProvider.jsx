@@ -24,6 +24,7 @@ export function AuthProvider({ children }) {
             type: AUTH_ACTIONS.SET_ERROR,
             payload: error.message,
           });
+          dispatch({ type: AUTH_ACTIONS.SET_LOADING, payload: false });
         }
       } else {
         dispatch({

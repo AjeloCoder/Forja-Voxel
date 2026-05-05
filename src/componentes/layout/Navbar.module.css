@@ -303,22 +303,32 @@
 }
 
 
-/* Auth Buttons Styles */
+/* Auth Buttons Styles - PIXEL ART */
 .loginButton {
-  background-color: var(--color-primary, #4a90e2);
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
+  background-color: #ff1100 !important;
+  color: #ffffff !important;
+  border: 3px solid #2c2c2c !important;
+  padding: 10px 15px !important;
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 0.7rem !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  box-shadow: 4px 4px 0px #2c2c2c !important;
+  transition: all 0.1s ease-in-out !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  border-radius: 0 !important;
 }
 
 .loginButton:hover {
-  background-color: var(--color-primary-dark, #357abd);
-  transform: translateY(-2px);
+  background-color: #ff3322 !important;
+  transform: translate(2px, 2px) !important;
+  box-shadow: 2px 2px 0px #2c2c2c !important;
+}
+
+.loginButton:active {
+  transform: translate(4px, 4px) !important;
+  box-shadow: 0px 0px 0px #2c2c2c !important;
 }
 
 .userMenu {

@@ -1,5 +1,5 @@
 
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useState } from 'react-router-dom';
 import { useCart } from "../../context/UseCart";
 import { useSettings } from '../../context/SettingsContext';
 import { useAuth } from '../../context/useAuth';
@@ -13,20 +13,26 @@ function Navbar({
   isHomePage,
   isMobileMenuOpen,
   toggleMobileMenu,
-  isDropdownOpen,
-  setIsDropdownOpen,
   closeAllMenus,
   onOpenAuthModal
 }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
   const { items } = useCart();
-  const { isAuthenticated, userData, logout } = useAuth();
+  const authContext = useAuth();
+  const { isAuthenticated, userData, logout } = authContext;
+
+  // DEBUG
+  console.log('🔐 AUTH DEBUG:', { isAuthenticated, userData, authContext });
   const totalItemsInCart = items.reduce((sum, item) => sum + item.quantity, 0);
   const isTallerPage = location.pathname === '/taller';
   const navClass = (isHomePage || isTallerPage) ? styles.navbarTransparent : styles.navbarSolid;
   const { isPlaying, toggleMusic } = useSettings();
 
-  const closeMenus = closeAllMenus;
+  const closeMenus = () => {
+    closeAllMenus();
+    setIsDropdownOpen(false);
+  };
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
   const handleLogout = async () => {
@@ -91,24 +97,25 @@ function Navbar({
             )}
           </Link>
 
-          {isAuthenticated ? (
-            <div className={styles.userMenu}>
-              <button className={styles.userButton}>
-                <FaUser />
-                <span>{userData?.nombre || 'Usuario'}</span>
-              </button>
-              <div className={styles.userDropdown}>
-                <button onClick={handleLogout} className={styles.logoutBtn}>Cerrar Sesión</button>
-              </div>
-            </div>
-          ) : (
-            <button
-              onClick={onOpenAuthModal}
-              className={styles.loginButton}
-            >
-              Inicia Sesión
-            </button>
-          )}
+          <button
+            onClick={onOpenAuthModal}
+            className={styles.loginButton}
+            style={{
+              backgroundColor: '#ff1100',
+              color: '#ffffff',
+              border: '3px solid #2c2c2c',
+              padding: '10px 15px',
+              fontFamily: "'Press Start 2P', cursive",
+              fontSize: '0.7rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              boxShadow: '4px 4px 0px #2c2c2c',
+              textTransform: 'uppercase',
+              letterSpacing: '1px'
+            }}
+          >
+            INICIA SESIÓN
+          </button>
 
           <div className={styles.hamburger} onClick={toggleMobileMenu}>
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
