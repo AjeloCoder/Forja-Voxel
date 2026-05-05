@@ -1,5 +1,6 @@
 .catalogSection {
   padding: 4rem 2rem;
+  margin-top: -2rem;
   background-color: var(--color-dark-grey); /* O el color que prefieras para esta sección */
   color: var(--color-white);
 }

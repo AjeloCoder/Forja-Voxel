@@ -1,11 +1,8 @@
 /* --- Contenedor Principal --- */
 .heroContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: flex-start;
   padding-top: 20vh;
@@ -14,16 +11,16 @@
   transition: transform 0.4s ease-out;
   animation: riseUp 2s ease-out forwards;
   background-size: cover;
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
-  background-image: url('/images/DarkSky2.jpeg');
+  background-image: url('/images/DarkSky.jpeg');
   overflow: hidden;
 }
 
-/* Desktop - Imagen grande */
+/* Desktop - Imagen grande DarkSky2 */
 @media (min-width: 768px) {
   .heroContainer {
-    background-image: url('/images/DarkSky.jpeg');
+    background-image: url('/images/DarkSky2.jpeg');
   }
 }
 

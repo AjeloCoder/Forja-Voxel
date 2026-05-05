@@ -1,5 +1,6 @@
 
-import { Link, NavLink, useLocation, useState } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from "../../context/UseCart";
 import { useSettings } from '../../context/SettingsContext';
 import { useAuth } from '../../context/useAuth';
