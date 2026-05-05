@@ -100,6 +100,19 @@ function Navbar({
           <button
             onClick={onOpenAuthModal}
             className={styles.loginButton}
+            style={{
+              backgroundColor: '#ff1100',
+              color: '#ffffff',
+              border: '3px solid #2c2c2c',
+              padding: '10px 15px',
+              fontFamily: "'Press Start 2P', cursive",
+              fontSize: '0.7rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              boxShadow: '4px 4px 0px #2c2c2c',
+              textTransform: 'uppercase',
+              letterSpacing: '1px'
+            }}
           >
             INICIA SESIÓN
           </button>
