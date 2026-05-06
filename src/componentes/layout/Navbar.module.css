@@ -396,6 +396,47 @@
   background-color: #fee;
 }
 
+.userAuthSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userName {
+  color: var(--color-white);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.logoutButton {
+  background-color: #ff1100 !important;
+  color: #ffffff !important;
+  border: 3px solid #2c2c2c !important;
+  padding: 8px 12px !important;
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 0.6rem !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  box-shadow: 3px 3px 0px #2c2c2c !important;
+  transition: all 0.1s ease-in-out !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  border-radius: 0 !important;
+}
+
+.logoutButton:hover {
+  background-color: #ff3322 !important;
+  transform: translate(1px, 1px) !important;
+  box-shadow: 2px 2px 0px #2c2c2c !important;
+}
+
+.logoutButton:active {
+  transform: translate(3px, 3px) !important;
+  box-shadow: 0px 0px 0px #2c2c2c !important;
+}
+
 @media (min-width: 768px) {
   .navLinksDesktop {
     display: flex;

@@ -34,7 +34,7 @@
   height: 200px;
   transform: translate(-50%, -50%);
   background: radial-gradient(ellipse at center, rgba(255, 68, 68, 0.3) 0%, rgba(255, 68, 68, 0) 70%);
-  animation: glow 10s ease-in-out infinite;
+  animation: glow 2s ease-in-out infinite;
   z-index: 1;
   pointer-events: none;
 }
