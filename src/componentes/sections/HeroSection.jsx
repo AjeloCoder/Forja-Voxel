@@ -1,16 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import styles from './HeroSection.module.css';
 
 function HeroSection() {
+  const handlePressStart = () => {
+    const catalogSection = document.getElementById('catalogo');
+    if (catalogSection) {
+      catalogSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    // 'id="home"' es útil para el scroll-to-section
     <section id="home" className={styles.heroContainer}>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>FORJA VÓXEL</h1>
-        <a href="#catalogo" className={`pixel-button ${styles.ctaButton} ${styles.blinking}`}>
+        <button
+          onClick={handlePressStart}
+          className={`pixel-button ${styles.ctaButton} ${styles.blinking}`}
+        >
           PRESS START
-        </a>
+        </button>
       </div>
     </section>
   );
