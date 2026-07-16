@@ -8,7 +8,10 @@
       "Bash(git commit -m 'Fix: Resolver conflicto de estado del Navbar dropdown *)",
       "Bash(git commit -m 'Mejorar Auth: Fix loading state y botón login más llamativo *)",
       "Bash(git commit -m 'UX: Estilizar botón login con pixel art y fijar modal z-index *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git merge *)",
+      "Bash(git checkout *)",
+      "Bash(git rm *)"
     ]
   }
 }
